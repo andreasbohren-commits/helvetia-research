@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="fr" data-palette="navy" data-density="regular">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple Inc. — Note de recherche Q2 2026 · Helvetia Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --c-ink:#0f1c2e;--c-ink-2:#2b3a4d;--c-muted:#5d6b7a;--c-faint:#8a96a3;
+  --c-rule:#d8d2c6;--c-rule-soft:#ece7dc;--c-paper:#ffffff;--c-canvas:#ebe6da;
+  --c-panel:#f6f3ec;--c-accent:#b8901f;--c-accent-2:#9a7619;--c-accent-ink:#2c2208;
+  --c-pos:#1f6f54;--c-pos-soft:#e3efe8;--c-neg:#9a2b22;--c-neg-soft:#f4e6e2;
+  --c-bar:#33485f;--c-bar-2:#8ea0b0;--c-grid:#e7e1d4;
+  --font-display:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --font-body:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --font-mono:"IBM Plex Mono","SFMono-Regular",ui-monospace,monospace;
+  --font-num:var(--font-mono);
+  --space:1;--base-fs:16px;--col-max:940px;
+  --shadow-sheet:0 1px 2px rgba(15,28,46,.04),0 18px 50px -28px rgba(15,28,46,.28);
+}
+html[data-palette="forest"]{--c-ink:#11302a;--c-ink-2:#244a42;--c-muted:#56685f;--c-faint:#8a9890;--c-rule:#cdd6cf;--c-rule-soft:#e2e9e2;--c-canvas:#e3e8e0;--c-panel:#eef2ea;--c-accent:#0f766e;--c-accent-2:#0c5f58;--c-accent-ink:#ffffff;--c-pos:#166e4f;--c-pos-soft:#e0efe7;--c-neg:#9a4318;--c-neg-soft:#f4e7df;--c-bar:#2c5048;--c-bar-2:#8aa69d;--c-grid:#e0e7df}
+html[data-palette="ink"]{--c-ink:#1a1a1a;--c-ink-2:#2f2f2f;--c-muted:#6a6a6a;--c-faint:#9a9a9a;--c-rule:#d9d3cb;--c-rule-soft:#ece7df;--c-canvas:#e6e1d8;--c-panel:#f3efe8;--c-accent:#8b1e2d;--c-accent-2:#771826;--c-accent-ink:#ffffff;--c-pos:#2f6d3b;--c-pos-soft:#e6efe5;--c-neg:#8b1e2d;--c-neg-soft:#f3e3e3;--c-bar:#3a3a3a;--c-bar-2:#9a9a9a;--c-grid:#e8e2d8}
+html[data-palette="swiss"]{--c-ink:#13294b;--c-ink-2:#2a3c5c;--c-muted:#5b6678;--c-faint:#98a1b0;--c-rule:#dcdee3;--c-rule-soft:#eef0f3;--c-canvas:#f4f5f7;--c-panel:#f2f4f7;--c-accent:#13294b;--c-accent-2:#0c1c38;--c-accent-ink:#ffffff;--c-pos:#157347;--c-pos-soft:#e5f0ea;--c-neg:#b42318;--c-neg-soft:#f7e6e4;--c-bar:#2a3c5c;--c-bar-2:#9aa6ba;--c-grid:#e7e9ee;--shadow-sheet:0 1px 2px rgba(19,41,75,.05),0 14px 40px -26px rgba(19,41,75,.22)}
+html[data-type="sans"]{--font-display:"IBM Plex Sans",system-ui,sans-serif}
+html[data-type="serif"]{--font-body:"Source Serif 4",Georgia,serif;--font-display:"Source Serif 4",Georgia,serif}
+html[data-density="compact"]{--space:.82;--base-fs:15px}
+html[data-density="regular"]{--space:1;--base-fs:16px}
+html[data-density="comfy"]{--space:1.2;--base-fs:16.5px}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--c-canvas);color:var(--c-ink);font-family:var(--font-body);font-size:var(--base-fs);line-height:1.62;font-feature-settings:"kern" 1,"liga" 1;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,h4{margin:0;font-weight:600;line-height:1.12;letter-spacing:-.01em}
+p{margin:0;text-wrap:pretty}
+a{color:inherit}
+sup{font-size:.62em}
+.num{font-family:var(--font-num);font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.mono{font-family:var(--font-mono)}
+.pos{color:var(--c-pos)}
+.neg{color:var(--c-neg)}
+.desk{padding:clamp(0px,4vw,56px) 16px 96px}
+.sheet{max-width:var(--col-max);margin:0 auto;background:var(--c-paper);box-shadow:var(--shadow-sheet);border:1px solid var(--c-rule-soft)}
+.pad{padding-left:clamp(22px,5vw,64px);padding-right:clamp(22px,5vw,64px)}
+.masthead{background:var(--c-ink);color:#f3efe6;padding:18px clamp(22px,5vw,64px) 16px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:13px}
+.brand .mark{width:34px;height:34px;flex:none}
+.brand .mark .acc{fill:var(--c-accent)}
+.brand .mark .cut{fill:var(--c-accent-ink)}
+.brand .wm{display:flex;flex-direction:column;line-height:1.05}
+.brand .wm b{font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:.14em;color:#fff}
+.brand .wm span{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.34em;color:var(--c-accent);margin-top:3px;text-transform:uppercase}
+.masthead .mh-right{text-align:right;font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;color:#b9c2cd;text-transform:uppercase;line-height:1.7}
+.masthead .mh-right b{color:var(--c-accent);font-weight:500}
+.goldrule{height:3px;background:var(--c-accent)}
+.goldrule.thin{height:2px}
+.titleblock{padding-top:calc(38px * var(--space));padding-bottom:calc(26px * var(--space))}
+.eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--c-accent-2);display:flex;gap:12px;align-items:center}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--c-rule)}
+.doc-title{font-family:var(--font-display);font-weight:600;font-size:clamp(34px,5.4vw,54px);line-height:1.02;margin-top:16px;letter-spacing:-.02em;color:var(--c-ink)}
+.doc-sub{margin-top:14px;font-size:17px;color:var(--c-muted);max-width:60ch;line-height:1.5}
+.doc-meta{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px 26px;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--c-faint);text-transform:uppercase}
+.doc-meta span b{color:var(--c-ink-2);font-weight:500}
+.tearsheet{border-top:2px solid var(--c-ink);border-bottom:1px solid var(--c-rule);display:grid;grid-template-columns:1.05fr 1fr}
+.tearsheet>div{padding:calc(26px * var(--space)) clamp(22px,5vw,64px)}
+.ts-left{border-right:1px solid var(--c-rule)}
+.ts-company{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ts-company .name{font-family:var(--font-display);font-size:23px;font-weight:600;color:var(--c-ink)}
+.ts-company .tick{font-family:var(--font-mono);font-size:12px;color:var(--c-paper);background:var(--c-ink);padding:3px 8px;letter-spacing:.06em}
+.ts-sector{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--c-faint);margin-top:8px}
+.call{margin-top:22px;display:flex;align-items:flex-end;gap:22px;flex-wrap:wrap}
+.rating-badge{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;background:var(--c-accent);color:var(--c-accent-ink);padding:12px 20px;min-width:130px}
+.rating-badge .lbl{font-family:var(--font-mono);font-size:9px;letter-spacing:.24em;text-transform:uppercase;opacity:.8}
+.rating-badge .val{font-family:var(--font-display);font-size:26px;font-weight:600;letter-spacing:.01em;margin-top:2px}
+.call .figs{display:flex;gap:28px}
+.fig .k{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--c-faint)}
+.fig .v{font-family:var(--font-display);font-size:27px;font-weight:600;color:var(--c-ink);margin-top:3px}
+.fig .v small{font-size:13px;font-family:var(--font-mono);color:var(--c-muted);font-weight:500}
+.fig .v.up{color:var(--c-pos)}
+.recscale{margin-top:4px}
+.recscale .scale-lbl{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--c-faint);margin-bottom:12px}
+.scale-track{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.scale-seg{height:8px;background:var(--c-rule);position:relative}
+.scale-seg.active{background:var(--c-accent)}
+.scale-names{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-top:9px}
+.scale-names span{font-family:var(--font-mono);font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--c-faint);text-align:center}
+.scale-names span.on{color:var(--c-ink);font-weight:600}
+.statgrid{margin-top:26px;display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--c-rule);border-left:1px solid var(--c-rule)}
+.stat{border-right:1px solid var(--c-rule);border-bottom:1px solid var(--c-rule);padding:11px 14px}
+.stat .k{font-family:var(--font-mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--c-faint)}
+.stat .v{font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--c-ink);margin-top:4px}
+.stat .v small{font-family:var(--font-mono);font-size:11px;color:var(--c-muted)}
+.layout{display:grid;grid-template-columns:210px 1fr;align-items:start}
+.toc{position:sticky;top:0;align-self:start;padding:calc(40px * var(--space)) 26px calc(40px * var(--space)) clamp(22px,5vw,64px);border-right:1px solid var(--c-rule-soft)}
+.toc h4{font-family:var(--font-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--c-faint);margin-bottom:16px}
+.toc ol{list-style:none;margin:0;padding:0;counter-reset:toc}
+.toc li{counter-increment:toc;margin:0 0 2px}
+.toc a{display:flex;gap:10px;text-decoration:none;color:var(--c-muted);font-size:13px;padding:5px 0;line-height:1.3;transition:color .15s;border-bottom:1px solid transparent}
+.toc a::before{content:counter(toc,decimal-leading-zero);font-family:var(--font-mono);font-size:10px;color:var(--c-accent-2);padding-top:2px}
+.toc a:hover{color:var(--c-ink)}
+.toc a.active{color:var(--c-ink);font-weight:600}
+.flow{padding:calc(40px * var(--space)) clamp(22px,5vw,64px) calc(40px * var(--space)) calc(38px * var(--space));min-width:0}
+.section{scroll-margin-top:16px}
+.section+.section{margin-top:calc(46px * var(--space))}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:calc(20px * var(--space))}
+.sec-num{font-family:var(--font-mono);font-size:12px;color:var(--c-accent-2);letter-spacing:.1em;padding-top:4px}
+.sec-title{font-family:var(--font-display);font-size:clamp(24px,3.4vw,32px);font-weight:600;color:var(--c-ink);letter-spacing:-.015em}
+.sec-rule{height:1px;background:var(--c-rule);margin-bottom:calc(22px * var(--space))}
+.subhead{font-family:var(--font-body);font-weight:600;font-size:13px;letter-spacing:.04em;color:var(--c-accent-2);text-transform:uppercase;margin:calc(26px * var(--space)) 0 10px;display:flex;align-items:center;gap:10px}
+.subhead::before{content:"";width:18px;height:2px;background:var(--c-accent);flex:none}
+.prose{font-size:15.5px;line-height:1.66;color:var(--c-ink-2);max-width:68ch}
+.prose+.prose{margin-top:14px}
+.prose strong{color:var(--c-ink);font-weight:600}
+.lead{font-size:18px;line-height:1.58;color:var(--c-ink);max-width:64ch}
+.lead .drop{color:var(--c-accent-2);font-weight:600}
+.hl{color:var(--c-ink);font-weight:600;font-family:var(--font-num);font-variant-numeric:tabular-nums}
+.keypoints{display:grid;gap:1px;background:var(--c-rule);border:1px solid var(--c-rule);margin-top:6px}
+.kp{background:var(--c-paper);padding:16px 18px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.kp .kp-ix{font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--c-accent);line-height:1}
+.kp p{font-size:14.5px;color:var(--c-ink-2)}
+.kp p b{color:var(--c-ink)}
+.figure{margin:calc(26px * var(--space)) 0;border:1px solid var(--c-rule);background:var(--c-paper)}
+.fig-cap{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:13px 18px 12px;border-bottom:1px solid var(--c-rule)}
+.fig-cap .ttl{font-family:var(--font-display);font-size:15.5px;font-weight:600;color:var(--c-ink)}
+.fig-cap .ex{font-family:var(--font-mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--c-faint);white-space:nowrap}
+.fig-body{padding:20px 18px 16px}
+.fig-note{padding:0 18px 14px;font-family:var(--font-mono);font-size:10px;color:var(--c-faint);letter-spacing:.02em;line-height:1.5}
+.fig-note b{color:var(--c-muted);font-weight:500}
+.svgchart{width:100%;height:auto;display:block;font-family:var(--font-mono)}
+.svgchart text{fill:var(--c-muted)}
+.svgchart .baseline{stroke:var(--c-ink)}
+.svgchart .val{fill:var(--c-ink);font-weight:600}
+.svgchart .cat{fill:var(--c-muted)}
+.svgchart .bar{fill:var(--c-bar)}
+.svgchart .bar.hi{fill:var(--c-accent)}
+.svgchart .bar.pos{fill:var(--c-pos)}
+.svgchart .bar.neg{fill:var(--c-neg)}
+.svgchart .bar2{fill:var(--c-bar-2)}
+.svgchart .gl{stroke:var(--c-grid);stroke-width:1}
+.svgchart .glabel{fill:var(--c-faint)}
+.svgchart .refline{stroke:var(--c-accent);stroke-dasharray:4 4;stroke-width:1.4}
+.svgchart .area{fill:var(--c-accent);opacity:.1}
+.svgchart .line{stroke:var(--c-ink);fill:none;stroke-width:2.5}
+.svgchart .dot{fill:var(--c-ink)}
+.fig-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:calc(26px * var(--space)) 0}
+@media(max-width:720px){.fig-grid{grid-template-columns:1fr}}
+.legend{display:flex;gap:18px;padding:11px 18px 4px;flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;color:var(--c-muted);text-transform:uppercase}
+.legend i{width:11px;height:11px;display:inline-block}
+.legend i.s1{background:var(--c-pos)}.legend i.s2{background:var(--c-neg)}
+.legend i.bar{background:var(--c-bar)}.legend i.hi{background:var(--c-accent)}
+.tbl{width:100%;border-collapse:collapse;margin:calc(20px * var(--space)) 0;font-size:14px}
+.tbl caption{text-align:left;font-family:var(--font-mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--c-faint);padding-bottom:9px}
+.tbl th{text-align:left;font-family:var(--font-mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-faint);font-weight:500;padding:9px 12px;border-bottom:1.5px solid var(--c-ink)}
+.tbl td{padding:11px 12px;border-bottom:1px solid var(--c-rule-soft);color:var(--c-ink-2)}
+.tbl td:first-child,.tbl th:first-child{padding-left:0}
+.tbl td:last-child,.tbl th:last-child{padding-right:0;text-align:right}
+.tbl tr td b{color:var(--c-ink)}
+.statusrow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+@media(max-width:640px){.statusrow{grid-template-columns:1fr}}
+.statuscard{border:1px solid var(--c-rule);padding:18px;position:relative;overflow:hidden}
+.statuscard .k{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--c-faint)}
+.statuscard .guide{font-family:var(--font-display);font-size:21px;font-weight:600;color:var(--c-ink);margin-top:8px}
+.statuscard .tag{display:inline-flex;align-items:center;gap:7px;margin-top:12px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-pos);font-weight:600}
+.statuscard .tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c-pos)}
+.statuscard .barbg{position:absolute;right:-10px;bottom:-12px;font-family:var(--font-display);font-size:86px;font-weight:700;color:var(--c-rule-soft);line-height:1}
+.scenarios{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+@media(max-width:760px){.scenarios{grid-template-columns:1fr}}
+.scn{border:1px solid var(--c-rule);border-top:3px solid var(--c-bar);padding:18px 18px 20px;display:flex;flex-direction:column}
+.scn.bull{border-top-color:var(--c-pos)}.scn.base{border-top-color:var(--c-accent)}.scn.bear{border-top-color:var(--c-neg)}
+.scn .scn-k{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--c-faint)}
+.scn .scn-px{font-family:var(--font-display);font-size:25px;font-weight:600;color:var(--c-ink);margin-top:8px;line-height:1.12;white-space:nowrap}
+.scn .scn-name{font-size:12.5px;font-weight:600;margin-top:9px;letter-spacing:.01em}
+.scn.bull .scn-name{color:var(--c-pos)}.scn.base .scn-name{color:var(--c-accent-2)}.scn.bear .scn-name{color:var(--c-neg)}
+.scn p{font-size:13px;line-height:1.55;color:var(--c-ink-2);margin-top:12px}
+.scn .scn-up{margin-top:auto;padding-top:14px;font-family:var(--font-mono);font-size:11px;color:var(--c-muted);letter-spacing:.04em}
+.ladder{margin:calc(24px * var(--space)) 0}
+.callout{border-left:3px solid var(--c-accent);background:var(--c-panel);padding:20px 24px;margin:calc(22px * var(--space)) 0}
+.callout p{font-size:15.5px;line-height:1.6;color:var(--c-ink)}
+.bigquote{font-family:var(--font-display);font-size:clamp(20px,2.6vw,26px);line-height:1.32;color:var(--c-ink);font-weight:600;letter-spacing:-.01em;max-width:24ch}
+.colophon{border-top:2px solid var(--c-ink);padding:calc(28px * var(--space)) clamp(22px,5vw,64px);background:var(--c-paper)}
+.colophon .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.disclaimer{font-family:var(--font-mono);font-size:9.5px;line-height:1.7;color:var(--c-faint);letter-spacing:.01em;max-width:90ch}
+.disclaimer b{color:var(--c-muted);font-weight:500}
+@media(max-width:860px){
+  .tearsheet{grid-template-columns:1fr}.ts-left{border-right:none;border-bottom:1px solid var(--c-rule)}
+  .layout{grid-template-columns:1fr}.toc{position:static;border-right:none;border-bottom:1px solid var(--c-rule-soft);padding-bottom:20px}
+  .toc ol{columns:2}.flow{padding-left:clamp(22px,5vw,64px)}
+}
+@media(max-width:560px){.call{gap:16px}.call .figs{gap:18px}.statgrid{grid-template-columns:1fr}.toc ol{columns:1}}
+@media print{
+  @page{size:A4 portrait;margin:13mm 12mm}
+  html,body{background:#fff}body{font-size:10pt;line-height:1.5}
+  .desk{padding:0}.sheet{box-shadow:none;border:none;max-width:none;width:100%}
+  #tweaks-root,.tweaks-host,.tweaks-fab{display:none!important}
+  .layout{display:grid;grid-template-columns:150px 1fr;column-gap:22px}
+  .toc{position:static;border-right:1px solid var(--c-rule);border-bottom:none;padding:2px 18px 0 0;margin:0}
+  .toc ol{columns:1}.toc a{break-inside:avoid}.flow{display:block;padding:0;min-width:0}
+  .figure{width:100%}.svgchart,.figure svg,img{max-width:100%;height:auto}.fig-grid{gap:14px}
+  .figure,.scn,.statuscard,.kp,.tbl,.callout,.scenarios,.statusrow,.fig-grid,.ladder{break-inside:avoid}
+  .sec-head,h1,h2,h3,h4{break-after:avoid}.doc-title{break-after:avoid}a{text-decoration:none;color:inherit}
+  .masthead,.goldrule,.rating-badge,.scale-seg,.scale-seg.active,.svgchart,.scn,.statuscard,.callout,.ts-company .tick,.tearsheet,.colophon{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<div class="desk">
+<article class="sheet">
+
+  <header class="masthead">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 34 34" aria-hidden="true">
+        <rect class="acc" x="0" y="0" width="34" height="34"/>
+        <rect class="cut" x="14.5" y="6" width="5" height="22"/>
+        <rect class="cut" x="6" y="14.5" width="22" height="5"/>
+      </svg>
+      <span class="wm"><b>HELVETIA</b><span>Research · Genève</span></span>
+    </div>
+    <div class="mh-right">
+      Equity Research &nbsp;·&nbsp; États-Unis<br>
+      Technologie &nbsp;·&nbsp; <b>Note d'actualisation</b>
+    </div>
+  </header>
+  <div class="goldrule"></div>
+
+  <div class="pad titleblock">
+    <div class="eyebrow">Note de recherche action</div>
+    <h1 class="doc-title">Apple accélère sur tous les fronts<br>malgré les vents macroéconomiques</h1>
+    <p class="doc-sub">Le deuxième trimestre 2026 dépasse nettement le consensus, porté par un iPhone en forte accélération et des Services à un record historique. Nous relevons notre objectif de cours à $290 et notre recommandation à Renforcer.</p>
+    <div class="doc-meta">
+      <span><b>Apple Inc.</b></span>
+      <span>Émetteur&nbsp; <b>AAPL</b></span>
+      <span>Publié&nbsp; <b>04 juin 2026</b></span>
+      <span>Analyste&nbsp; <b>Bureau Technologie · Helvetia Research</b></span>
+    </div>
+  </div>
+
+  <section class="tearsheet" aria-label="Synthèse de la recommandation">
+    <div class="ts-left">
+      <div class="ts-company">
+        <span class="name">Apple Inc.</span>
+        <span class="tick">AAPL</span>
+      </div>
+      <div class="ts-sector">NASDAQ · Technologie · Actions ordinaires</div>
+
+      <div class="call">
+        <div class="rating-badge">
+          <span class="lbl">Recommandation</span>
+          <span class="val">Renforcer</span>
+        </div>
+        <div class="figs">
+          <div class="fig">
+            <div class="k">Objectif</div>
+            <div class="v"><span class="num">290</span><small> $</small></div>
+          </div>
+          <div class="fig">
+            <div class="k">Cours</div>
+            <div class="v"><span class="num">247,00</span><small> $</small></div>
+          </div>
+          <div class="fig">
+            <div class="k">Potentiel</div>
+            <div class="v up num">+17,4 %</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="recscale" style="margin-top:26px">
+        <div class="scale-lbl">Échelle de recommandation</div>
+        <div class="scale-track">
+          <div class="scale-seg"></div><div class="scale-seg"></div>
+          <div class="scale-seg"></div><div class="scale-seg active"></div>
+          <div class="scale-seg"></div>
+        </div>
+        <div class="scale-names">
+          <span>Vendre</span><span>Alléger</span><span>Conserver</span><span class="on">Renforcer</span><span>Acheter</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ts-right">
+      <div class="scale-lbl" style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--c-faint)">Indicateurs clés · Q2 2026</div>
+      <div class="statgrid">
+        <div class="stat"><div class="k">Croissance revenus</div><div class="v num">+17,0 %</div></div>
+        <div class="stat"><div class="k">vs consensus</div><div class="v num">+150 <small>pdb</small></div></div>
+        <div class="stat"><div class="k">P/E à terme</div><div class="v num">30,5<small>x</small></div></div>
+        <div class="stat"><div class="k">Consensus revenus 2026</div><div class="v num">$410,8<small> mrd</small></div></div>
+        <div class="stat"><div class="k">Réaction du cours</div><div class="v num pos">+6,0 %</div></div>
+        <div class="stat"><div class="k">Orientations Q3 2026</div><div class="v" style="font-size:14px">+14 à +17 %</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Sommaire">
+      <h4>Sommaire</h4>
+      <ol>
+        <li><a href="#s1">Résumé pour investisseurs</a></li>
+        <li><a href="#s2">Analyse des résultats</a></li>
+        <li><a href="#s3">Perspectives 2026</a></li>
+        <li><a href="#s4">Analyse d'investissement</a></li>
+        <li><a href="#s5">Conclusion</a></li>
+      </ol>
+    </nav>
+
+    <main class="flow">
+
+      <!-- 01 -->
+      <section class="section" id="s1" data-screen-label="01 Résumé">
+        <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">Résumé pour investisseurs</h2></div>
+        <div class="sec-rule"></div>
+
+        <p class="lead"><span class="drop">Le deuxième trimestre 2026 dépasse significativement le consensus</span> ($111,2 mrd de revenus, +17,0 % sur un an contre +15,5 % attendu), la division iPhone en accélération spectaculaire (+56,7 %) entraînant la dynamique. Les Services atteignent un record historique. Les orientations Q3 2026 sont données à +14-17 %.</p>
+
+        <div class="keypoints">
+          <div class="kp"><span class="kp-ix">01</span><p><b>Dépassement net sur revenus et BPA.</b> Revenus de $111,2 mrd (+1,5 % vs consensus), BPA dilué de $2,10 en hausse de <b>+9,4 %</b> par rapport aux estimations — accélération du levier opérationnel.</p></div>
+          <div class="kp"><span class="kp-ix">02</span><p><b>Services à un record historique.</b> $30,98 mrd (+15,5 % sur un an), représentant désormais <b>28 % des revenus</b> — un niveau jamais atteint.</p></div>
+          <div class="kp"><span class="kp-ix">03</span><p><b>iPhone en forte accélération.</b> $56,99 mrd (<b>+56,7 %</b> sur un an), soit 51,3 % des revenus totaux, soutenu par une forte demande de renouvellement.</p></div>
+          <div class="kp"><span class="kp-ix">04</span><p><b>Expansion des marges et retours aux actionnaires.</b> Marge brute à <b>49,3 %</b> (+110 pdb sur un an), nouveau programme de rachat de $100 mrd et dividende en hausse de 4 %.</p></div>
+        </div>
+      </section>
+
+      <!-- 02 -->
+      <section class="section" id="s2" data-screen-label="02 Analyse des résultats">
+        <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Analyse des résultats</h2></div>
+        <div class="sec-rule"></div>
+
+        <div class="subhead">Dépassement du consensus</div>
+        <p class="prose">Apple a enregistré des revenus de <span class="hl">$111,2 mrd</span> au deuxième trimestre 2026, dépassant le consensus de $1,54 mrd (+1,5 %), représentant une croissance de <strong>+17,0 % sur un an</strong>. Le BPA dilué de <strong>$2,10</strong> a surpassé les estimations de $1,92 de +9,4 %, bénéficiant du levier opérationnel et de conditions fiscales favorables. L'accélération est structurelle : le dépassement sur les revenus progresse de trimestre en trimestre.</p>
+
+        <figure class="figure">
+          <figcaption class="fig-cap"><span class="ttl">Croissance trimestrielle des revenus</span><span class="ex">% · Glissement annuel</span></figcaption>
+          <div class="fig-body"><div data-chart="revenue_growth"></div></div>
+          <div class="fig-note"><b>Source :</b> publications trimestrielles Apple, estimations Helvetia Research. Les trois derniers trimestres surlignés reflètent l'accélération de la croissance.</div>
+        </figure>
+
+        <p class="prose">L'accélération du BPA témoigne d'un levier opérationnel croissant : +4,2 % de dépassement en Q4 2025, puis +6,8 % en Q1 2026, et <strong>+9,4 % au Q2 2026</strong> — signal fort d'une expansion continue des marges au-delà des attentes.</p>
+
+        <figure class="figure">
+          <figcaption class="fig-cap"><span class="ttl">Dépassement du consensus — revenus et BPA</span><span class="ex">% d'écart vs estimations</span></figcaption>
+          <div class="legend"><span><i class="s1"></i>Dépassement revenus</span><span><i class="hi"></i>Dépassement BPA</span></div>
+          <div class="fig-body"><div data-chart="beat_miss"></div></div>
+          <div class="fig-note"><b>Source :</b> Bloomberg, Helvetia Research. Le dépassement BPA accélère nettement, reflétant un levier opérationnel structurel.</div>
+        </figure>
+
+        <div class="subhead">Performance par segment et géographie</div>
+        <p class="prose">L'iPhone affiche une croissance spectaculaire de <strong>+56,7 %</strong> à $56,99 mrd, représentant désormais 51,3 % des revenus totaux. Les Services atteignent un record historique de <strong>$30,98 mrd</strong> (+15,5 % sur un an). Sur le plan géographique, la Grande Chine a livré $20,5 mrd (+28,1 % sur un an), témoignant d'une résilience remarquable. Les Amériques restent le premier marché avec environ $50,0 mrd.</p>
+
+        <div class="fig-grid">
+          <figure class="figure" style="margin:0">
+            <figcaption class="fig-cap"><span class="ttl">Croissance par segment</span><span class="ex">Q2 2026 · % sur un an</span></figcaption>
+            <div class="fig-body"><div data-chart="segments"></div></div>
+          </figure>
+          <figure class="figure" style="margin:0">
+            <figcaption class="fig-cap"><span class="ttl">Revenus par segment</span><span class="ex">Q2 2026 · $ mrd</span></figcaption>
+            <div class="fig-body"><div data-chart="product_revenue"></div></div>
+          </figure>
+        </div>
+      </section>
+
+      <!-- 03 -->
+      <section class="section" id="s3" data-screen-label="03 Perspectives 2026">
+        <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">Perspectives 2026</h2></div>
+        <div class="sec-rule"></div>
+
+        <div class="subhead">Orientations Q3 2026</div>
+        <p class="prose">Apple a guidé vers une croissance des revenus de <strong>+14 à +17 %</strong> en glissement annuel au troisième trimestre 2026 (base : $97,4 mrd au Q3 2025), impliquant des revenus d'environ $112 mrd au point médian. Cette dynamique confirme la robustesse de la demande malgré une légère décélération saisonnière.</p>
+
+        <div class="statusrow">
+          <div class="statuscard">
+            <div class="k">Croissance revenus Q3 2026</div>
+            <div class="guide">+14 à +17 %</div>
+            <div class="tag">Guidé</div>
+            <div class="barbg">→</div>
+          </div>
+          <div class="statuscard">
+            <div class="k">Marge brute FY2026</div>
+            <div class="guide">Env. 47,5 %</div>
+            <div class="tag">En hausse</div>
+            <div class="barbg">↑</div>
+          </div>
+        </div>
+
+        <table class="tbl">
+          <caption>Orientations et estimations — FY2026</caption>
+          <thead><tr><th>Métrique</th><th>Orientation / Consensus</th><th>Statut</th></tr></thead>
+          <tbody>
+            <tr><td><b>Croissance revenus Q3 2026</b></td><td>+14 à +17 % sur un an</td><td class="pos">Guidé ✓</td></tr>
+            <tr><td><b>Revenus FY2026 (consensus)</b></td><td>~$410,8 mrd (+10,4 % sur un an)</td><td class="pos">En hausse</td></tr>
+            <tr><td><b>Marge brute FY2026</b></td><td>Environ 47,5 %</td><td class="pos">En progression</td></tr>
+          </tbody>
+        </table>
+
+        <p class="prose">Le cycle de lancement iPhone 16 en septembre 2026 constitue le principal catalyseur de court terme. Avec une base installée de <strong>900 millions d'appareils</strong> — dont 15 à 20 % n'ayant pas mis à niveau depuis plus de 3 ans — la dynamique de renouvellement pourrait surpasser les cycles précédents, renforcée par les nouvelles fonctionnalités d'intelligence artificielle embarquée.</p>
+
+        <figure class="figure">
+          <figcaption class="fig-cap"><span class="ttl">Répartition géographique des revenus</span><span class="ex">Q2 2026 · $ mrd</span></figcaption>
+          <div class="fig-body"><div data-chart="geography"></div></div>
+          <div class="fig-note"><b>Source :</b> Apple Inc., estimations Helvetia Research. La Grande Chine (+28,1 % sur un an) démontre une résilience supérieure aux attentes.</div>
+        </figure>
+
+        <div class="fig-grid">
+          <figure class="figure" style="margin:0">
+            <figcaption class="fig-cap"><span class="ttl">Fourchette des orientations Q3 2026</span><span class="ex">$ mrd</span></figcaption>
+            <div class="fig-body"><div data-chart="guidance"></div></div>
+          </figure>
+          <figure class="figure" style="margin:0">
+            <figcaption class="fig-cap"><span class="ttl">Services — progression des revenus</span><span class="ex">$ mrd · par trimestre</span></figcaption>
+            <div class="fig-body"><div data-chart="services_trend"></div></div>
+          </figure>
+        </div>
+        <p class="prose">Les Services représentent désormais <strong>28 % des revenus totaux</strong>, en hausse de 15,5 % sur un an à $30,98 mrd — un record absolu. Nous estimons que les Services pourraient atteindre 32-35 % des revenus d'ici FY2028, portant la marge brute consolidée vers 51-52 %.</p>
+      </section>
+
+      <!-- 04 -->
+      <section class="section" id="s4" data-screen-label="04 Analyse d'investissement">
+        <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">Analyse d'investissement</h2></div>
+        <div class="sec-rule"></div>
+
+        <div class="scenarios">
+          <div class="scn bull">
+            <div class="scn-k">Scénario haussier</div>
+            <div class="scn-px">$305–315</div>
+            <div class="scn-name">Réévaluation du multiple</div>
+            <p>Services >15 % sur un an, base de plus de 2 mrd d'appareils, et cycle iPhone 16 en soutien. Les Services représentant >28 % des revenus d'ici 2027 soutiendraient une marge brute de >48 % et une croissance du BPA à deux chiffres. Un P/E de 33-34x sur les estimations révisées implique $305-315.</p>
+            <div class="scn-up">Potentiel&nbsp; <b class="num">+23 à +27 %</b></div>
+          </div>
+          <div class="scn base">
+            <div class="scn-k">Scénario de base</div>
+            <div class="scn-px">$290</div>
+            <div class="scn-name">Renforcer</div>
+            <p>Revenus FY2026 de $410,8 mrd (+10,4 % sur un an), marge brute 47,5 %, croissance Services +12-15 % de TCAC. Multiple de 32x P/E à terme. Le programme de rachat de $100 mrd soutient l'accrétion du BPA et une croissance durable.</p>
+            <div class="scn-up">Objectif&nbsp; <b class="num">$290</b></div>
+          </div>
+          <div class="scn bear">
+            <div class="scn-k">Scénario baissier</div>
+            <div class="scn-px">$190–210</div>
+            <div class="scn-name">Compression du multiple</div>
+            <p>Les risques incluent un ralentissement en Chine, une récession macro, des contraintes réglementaires en UE et une concurrence accrue. Une compression vers un multiple de 28x P/E pourrait impliquer $190-210, soit -14 à -23 % de risque baissier.</p>
+            <div class="scn-up">Risque&nbsp; <b class="num">−14 à −23 %</b></div>
+          </div>
+        </div>
+
+        <figure class="figure ladder" style="margin-top:26px">
+          <figcaption class="fig-cap"><span class="ttl">Objectif de cours et fourchette de valorisation</span><span class="ex">$</span></figcaption>
+          <div class="fig-body"><div data-chart="targetladder"></div></div>
+          <div class="fig-note"><b>Lecture :</b> objectif de $290 (+17,4 % vs cours actuel de $247), encadré par un scénario baissier de $190-210 et un scénario haussier de $305-315.</div>
+        </figure>
+
+        <p class="prose">L'équilibre des risques pour 2026 oppose deux contraintes identifiées — le ralentissement potentiel en Chine et les pressions réglementaires européennes — à trois leviers de croissance : le cycle iPhone 16, l'accélération des Services et la dynamique des retours de capital.</p>
+
+        <div class="fig-grid">
+          <figure class="figure" style="margin:0">
+            <figcaption class="fig-cap"><span class="ttl">Vents contraires vs catalyseurs</span><span class="ex">Impact estimé · %</span></figcaption>
+            <div class="fig-body"><div data-chart="headwinds"></div></div>
+          </figure>
+          <figure class="figure" style="margin:0">
+            <figcaption class="fig-cap"><span class="ttl">Évolution de la marge brute</span><span class="ex">% · par trimestre</span></figcaption>
+            <div class="fig-body"><div data-chart="margin"></div></div>
+          </figure>
+        </div>
+
+        <div class="fig-grid">
+          <figure class="figure" style="margin:0">
+            <figcaption class="fig-cap"><span class="ttl">Revenus trimestriels publiés</span><span class="ex">$ mrd</span></figcaption>
+            <div class="fig-body"><div data-chart="revenue_abs"></div></div>
+            <div class="fig-note">Saisonnalité marquée : le trimestre fiscal Q1 (oct-déc) est structurellement plus élevé. Le Q2 2026 marque une accélération historique à +17 %.</div>
+          </figure>
+          <figure class="figure" style="margin:0">
+            <figcaption class="fig-cap"><span class="ttl">Réaction du cours aux résultats</span><span class="ex">$ · +6,0 %</span></figcaption>
+            <div class="fig-body"><div data-chart="reaction"></div></div>
+          </figure>
+        </div>
+      </section>
+
+      <!-- 05 -->
+      <section class="section" id="s5" data-screen-label="05 Conclusion">
+        <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">Conclusion</h2></div>
+        <div class="sec-rule"></div>
+
+        <p class="bigquote">Une accélération marquée, portée par des fondamentaux robustes et des catalyseurs de croissance multiples.</p>
+
+        <p class="prose" style="margin-top:18px">Apple démontre une capacité d'accélération rare pour une entreprise de cette taille. Le dépassement du consensus, l'iPhone en tête et les Services à un record soutiennent une perspective positive à moyen terme. La marge brute à 49,3 % illustre le pouvoir de tarification et l'effet de mix favorable vers les activités à plus forte valeur ajoutée.</p>
+
+        <div class="callout">
+          <p>La valorisation à <strong>30,5x P/E à terme</strong> reste attractive au regard du profil de croissance d'Apple (BPA +22 % sur un an). Nous relevons notre recommandation à <strong>Renforcer</strong> avec un objectif de cours de <strong>$290</strong>, impliquant un potentiel de <strong>+17,4 %</strong> à partir des niveaux actuels. Le cycle iPhone 16 en septembre 2026 constitue le principal catalyseur de court terme, suivi de l'accélération continue des Services vers 30-35 % des revenus.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="goldrule thin"></div>
+  <footer class="colophon">
+    <div class="row">
+      <div class="brand">
+        <svg class="mark" viewBox="0 0 34 34" aria-hidden="true">
+          <rect class="acc" x="0" y="0" width="34" height="34"/>
+          <rect class="cut" x="14.5" y="6" width="5" height="22"/>
+          <rect class="cut" x="6" y="14.5" width="22" height="5"/>
+        </svg>
+        <span class="wm" style="line-height:1.1"><b style="color:var(--c-ink);font-family:var(--font-display);font-weight:600;letter-spacing:.14em;font-size:15px">HELVETIA RESEARCH</b><span style="font-family:var(--font-mono);font-size:9px;letter-spacing:.28em;color:var(--c-accent-2);text-transform:uppercase;margin-top:3px">Equity Research · Genève</span></span>
+      </div>
+      <div style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:.12em;color:var(--c-faint);text-transform:uppercase;text-align:right">
+        Apple Inc. · AAPL | NASDAQ<br>04 juin 2026 · Renforcer · Obj. $290
+      </div>
+    </div>
+    <p class="disclaimer"><b>Avertissement.</b> Le présent document est produit par Helvetia Research à titre d'information uniquement et ne constitue ni une offre, ni une sollicitation d'achat ou de vente d'un quelconque instrument financier. Les opinions et estimations reflètent notre jugement à la date de publication et sont susceptibles d'être modifiées sans préavis. Les performances passées ne préjugent pas des résultats futurs. Les graphiques et chiffres s'appuient sur les publications de la société et sur les estimations internes d'Helvetia Research ; ils peuvent comporter des imprécisions. Cette note de démonstration ne constitue pas un conseil en investissement. Tout investisseur doit procéder à sa propre analyse et, le cas échéant, consulter un conseiller agréé. © 2026 Helvetia Research. Tous droits réservés.</p>
+  </footer>
+
+</article>
+</div>
+
+<div id="tweaks-root"></div>
+
+<script>
+(function(){
+"use strict";
+const VW=760;
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function svgWrap(h,inner){return`<svg class="svgchart" viewBox="0 0 ${VW} ${h}" preserveAspectRatio="xMidYMid meet" role="img">${inner}</svg>`}
+function niceTicks(min,max,count){const span=max-min,raw=span/count,mag=Math.pow(10,Math.floor(Math.log10(raw))),norm=raw/mag;let step;if(norm<1.5)step=1;else if(norm<3)step=2;else if(norm<7)step=5;else step=10;step*=mag;const start=Math.ceil(min/step)*step,ticks=[];for(let v=start;v<=max+1e-9;v+=step)ticks.push(Math.round(v*1e6)/1e6);return ticks}
+function catLines(l){return Array.isArray(l)?l:[l]}
+
+function columnChart(cfg){
+  const data=cfg.data,n=data.length,maxLines=Math.max(...data.map(d=>catLines(d.label).length));
+  const padT=40,padR=18,padL=cfg.padL!=null?cfg.padL:46,padB=16+maxLines*15;
+  const H=cfg.height||330,x0=padL,x1=VW-padR,y0=H-padB,yTop=padT;
+  const yMin=cfg.yMin!=null?cfg.yMin:0,yMax=cfg.yMax;
+  const ySc=v=>y0-(v-yMin)/(yMax-yMin)*(y0-yTop),zeroY=ySc(Math.max(0,yMin));
+  const fmt=cfg.fmt||(v=>v),slot=(x1-x0)/n,bw=Math.min(cfg.barWidth||64,slot*0.56);
+  let s="";
+  const ticks=cfg.ticks||niceTicks(yMin,yMax,4);
+  ticks.forEach(t=>{const y=ySc(t);s+=`<line class="gl" x1="${x0}" y1="${y.toFixed(1)}" x2="${x1}" y2="${y.toFixed(1)}"/>`;s+=`<text class="glabel" x="${(x0-9)}" y="${(y+3.5).toFixed(1)}" text-anchor="end" font-size="11">${esc(cfg.yfmt?cfg.yfmt(t):t)}</text>`});
+  s+=`<line class="baseline" x1="${x0}" y1="${zeroY.toFixed(1)}" x2="${x1}" y2="${zeroY.toFixed(1)}" stroke-width="1.4"/>`;
+  data.forEach((d,i)=>{
+    const cx=x0+slot*(i+0.5),x=cx-bw/2,vy=ySc(d.value),top=Math.min(vy,zeroY),h=Math.abs(vy-zeroY),cls=d.cls||(cfg.allHi?"hi":"bar");
+    s+=`<rect class="bar ${cls}" x="${x.toFixed(1)}" y="${top.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(1,h).toFixed(1)}"/>`;
+    const lblY=d.value>=0?top-11:top+h+19;
+    s+=`<text class="val" x="${cx.toFixed(1)}" y="${lblY.toFixed(1)}" text-anchor="middle" font-size="15" font-weight="700">${esc(fmt(d.value))}</text>`;
+    catLines(d.label).forEach((ln,li)=>{s+=`<text class="cat" x="${cx.toFixed(1)}" y="${(y0+18+li*15).toFixed(1)}" text-anchor="middle" font-size="11.5">${esc(ln)}</text>`});
+  });
+  if(cfg.refLine){const y=ySc(cfg.refLine.value);s+=`<line class="refline" x1="${x0}" y1="${y.toFixed(1)}" x2="${x1}" y2="${y.toFixed(1)}"/>`;if(cfg.refLine.label)s+=`<text x="${x0+4}" y="${(y-8).toFixed(1)}" text-anchor="start" font-size="10.5" class="glabel" letter-spacing=".1em" style="fill:var(--c-accent-2)">${esc(cfg.refLine.label)}</text>`}
+  return svgWrap(H,s);
+}
+
+function groupedChart(cfg){
+  const data=cfg.data,series=cfg.series,ns=series.length,n=data.length;
+  const padT=40,padR=18,padL=46,padB=46,H=cfg.height||340;
+  const x0=padL,x1=VW-padR,y0=H-padB,yTop=padT;
+  const yMin=cfg.yMin!=null?cfg.yMin:0,yMax=cfg.yMax;
+  const ySc=v=>y0-(v-yMin)/(yMax-yMin)*(y0-yTop),zeroY=ySc(Math.max(0,yMin));
+  const fmt=cfg.fmt||(v=>v),slot=(x1-x0)/n,groupW=Math.min(slot*0.62,150),bw=groupW/ns-6;
+  let s="";
+  const ticks=cfg.ticks||niceTicks(yMin,yMax,4);
+  ticks.forEach(t=>{const y=ySc(t);s+=`<line class="gl" x1="${x0}" y1="${y.toFixed(1)}" x2="${x1}" y2="${y.toFixed(1)}"/>`;s+=`<text class="glabel" x="${(x0-9)}" y="${(y+3.5).toFixed(1)}" text-anchor="end" font-size="11">${esc(cfg.yfmt?cfg.yfmt(t):t)}</text>`});
+  s+=`<line class="baseline" x1="${x0}" y1="${zeroY.toFixed(1)}" x2="${x1}" y2="${zeroY.toFixed(1)}" stroke-width="1.4"/>`;
+  data.forEach((d,i)=>{
+    const gx=x0+slot*(i+0.5)-groupW/2;
+    series.forEach((se,j)=>{const v=d.values[j],x=gx+j*(bw+6)+3,vy=ySc(v),top=Math.min(vy,zeroY),h=Math.abs(vy-zeroY);s+=`<rect class="bar ${se.cls}" x="${x.toFixed(1)}" y="${top.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(1,h).toFixed(1)}"/>`;const lblY=v>=0?top-8:top+h+16;s+=`<text class="val" x="${(x+bw/2).toFixed(1)}" y="${lblY.toFixed(1)}" text-anchor="middle" font-size="12.5" font-weight="700">${esc(fmt(v))}</text>`});
+    const cx=x0+slot*(i+0.5);catLines(d.label).forEach((ln,li)=>{s+=`<text class="cat" x="${cx.toFixed(1)}" y="${(y0+18+li*15).toFixed(1)}" text-anchor="middle" font-size="11.5">${esc(ln)}</text>`});
+  });
+  return svgWrap(H,s);
+}
+
+function barRows(cfg){
+  const data=cfg.data,n=data.length,rowH=cfg.rowH||34,gap=12;
+  const padT=8,padB=8,padL=cfg.padL||130,padR=70;
+  const H=padT+padB+n*rowH+(n-1)*gap,x0=padL,x1=VW-padR;
+  const max=cfg.max||Math.max(...data.map(d=>d.value));
+  const xSc=v=>x0+(v/max)*(x1-x0),fmt=cfg.fmt||(v=>v);
+  let s="";
+  data.forEach((d,i)=>{const y=padT+i*(rowH+gap),w=xSc(d.value)-x0;s+=`<rect class="bar ${d.cls||'bar'}" x="${x0}" y="${y}" width="${Math.max(2,w).toFixed(1)}" height="${rowH}"/>`;s+=`<text class="cat" x="${(x0-14)}" y="${(y+rowH/2+4).toFixed(1)}" text-anchor="end" font-size="12.5">${esc(d.label)}</text>`;s+=`<text class="val" x="${(x0+w+12).toFixed(1)}" y="${(y+rowH/2+4.5).toFixed(1)}" font-size="13.5" font-weight="700">${esc(fmt(d.value))}</text>`});
+  return svgWrap(H,s);
+}
+
+function lineArea(cfg){
+  const pts=cfg.data,n=pts.length,padT=40,padR=24,padL=46,padB=44,H=cfg.height||320;
+  const x0=padL,x1=VW-padR,y0=H-padB,yTop=padT,yMin=cfg.yMin,yMax=cfg.yMax;
+  const ySc=v=>y0-(v-yMin)/(yMax-yMin)*(y0-yTop),xSc=i=>x0+(i/(n-1))*(x1-x0);
+  const fmt=cfg.fmt||(v=>v);
+  let s="";
+  const ticks=cfg.ticks||niceTicks(yMin,yMax,4);
+  ticks.forEach(t=>{const y=ySc(t);s+=`<line class="gl" x1="${x0}" y1="${y.toFixed(1)}" x2="${x1}" y2="${y.toFixed(1)}"/>`;s+=`<text class="glabel" x="${(x0-9)}" y="${(y+3.5).toFixed(1)}" text-anchor="end" font-size="11">${esc(cfg.yfmt?cfg.yfmt(t):t)}</text>`});
+  let line="",area=`M ${x0} ${y0} `;
+  pts.forEach((p,i)=>{const x=xSc(i),y=ySc(p.value);line+=(i===0?"M":"L")+` ${x.toFixed(1)} ${y.toFixed(1)} `;area+=`L ${x.toFixed(1)} ${y.toFixed(1)} `});
+  area+=`L ${x1} ${y0} Z`;
+  s+=`<path class="area" d="${area}"/>`;s+=`<path class="line" d="${line}"/>`;
+  pts.forEach((p,i)=>{const x=xSc(i),y=ySc(p.value);s+=`<circle class="dot" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.5"/>`;s+=`<text class="val" x="${x.toFixed(1)}" y="${(y-14).toFixed(1)}" text-anchor="middle" font-size="14.5" font-weight="700">${esc(fmt(p.value))}</text>`;catLines(p.label).forEach((ln,li)=>{s+=`<text class="cat" x="${x.toFixed(1)}" y="${(y0+18+li*15).toFixed(1)}" text-anchor="middle" font-size="11.5">${esc(ln)}</text>`})});
+  return svgWrap(H,s);
+}
+
+function ladder(cfg){
+  const H=150,padL=22,padR=22,top=64,x0=padL,x1=VW-padR,lo=cfg.min,hi=cfg.max;
+  const xSc=v=>x0+(v-lo)/(hi-lo)*(x1-x0);
+  let s="";
+  (cfg.zones||[]).forEach(z=>{const a=xSc(z.from),b=xSc(z.to);s+=`<rect class="bar ${z.cls}" x="${a.toFixed(1)}" y="${top-7}" width="${(b-a).toFixed(1)}" height="14" opacity="0.18"/>`;s+=`<text class="cat" x="${((a+b)/2).toFixed(1)}" y="${top-16}" text-anchor="middle" font-size="11" letter-spacing=".06em">${esc(z.label)}</text>`});
+  s+=`<line class="baseline" x1="${x0}" y1="${top}" x2="${x1}" y2="${top}" stroke-width="2"/>`;
+  (cfg.axisTicks||[]).forEach(t=>{const x=xSc(t);s+=`<line class="gl" x1="${x.toFixed(1)}" y1="${top}" x2="${x.toFixed(1)}" y2="${top+6}"/>`;s+=`<text class="glabel" x="${x.toFixed(1)}" y="${top+20}" text-anchor="middle" font-size="10.5">${esc(t)}</text>`});
+  (cfg.markers||[]).forEach(m=>{const x=xSc(m.value),up=m.up!==false,ty=up?top-30:top+38;s+=`<line x1="${x.toFixed(1)}" y1="${top}" x2="${x.toFixed(1)}" y2="${(up?top-22:top+22).toFixed(1)}" stroke="var(--c-${m.color||'ink'})" stroke-width="2"/>`;s+=`<circle cx="${x.toFixed(1)}" cy="${top}" r="5.5" fill="var(--c-${m.color||'ink'})"/>`;s+=`<text x="${x.toFixed(1)}" y="${ty.toFixed(1)}" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--c-${m.color||'ink'})" font-family="var(--font-display)">${esc(m.label)}</text>`;s+=`<text x="${x.toFixed(1)}" y="${(up?ty-15:ty+15).toFixed(1)}" text-anchor="middle" font-size="9" class="glabel" letter-spacing=".14em">${esc(m.k)}</text>`});
+  return svgWrap(H,s);
+}
+
+const pct1=v=>(v>0?"+":"")+v.toFixed(1)+"%";
+const pct1np=v=>v.toFixed(1)+"%";
+
+const CHARTS={
+  revenue_growth:()=>columnChart({
+    height:340,yMin:-6,yMax:20,ticks:[-5,0,5,10,15,20],yfmt:v=>v.toFixed(0),
+    fmt:pct1np,
+    refLine:{value:17.0,label:"Q2 2026 · 17,0 %"},
+    data:[
+      {label:["Q2","2024"],value:-4.3},{label:["Q3","2024"],value:4.9},
+      {label:["Q4","2024"],value:6.1},{label:["Q1","2025"],value:4.0},
+      {label:["Q2","2025"],value:5.1},{label:["Q3","2025"],value:8.3},
+      {label:["Q4","2025"],value:11.2,cls:"hi"},{label:["Q1","2026"],value:14.0,cls:"hi"},
+      {label:["Q2","2026"],value:17.0,cls:"hi"}
+    ]
+  }),
+  beat_miss:()=>groupedChart({
+    height:320,yMin:0,yMax:11,ticks:[0,2,4,6,8,10],yfmt:v=>v.toFixed(0),
+    fmt:v=>"+"+v.toFixed(1)+"%",
+    series:[{name:"Revenus",cls:"pos"},{name:"BPA",cls:"hi"}],
+    data:[
+      {label:["Q4","2025"],values:[0.8,4.2]},
+      {label:["Q1","2026"],values:[1.2,6.8]},
+      {label:["Q2","2026"],values:[1.5,9.4]}
+    ]
+  }),
+  segments:()=>columnChart({
+    height:340,yMin:-10,yMax:65,ticks:[0,15,30,45,60],
+    yfmt:v=>v.toFixed(0)+"%",fmt:v=>(v>0?"+":"")+v.toFixed(1)+"%",
+    data:[
+      {label:"iPhone",value:56.7,cls:"hi"},
+      {label:"Services",value:15.5,cls:"pos"},
+      {label:"iPad",value:12.0,cls:"bar"},
+      {label:"Mac",value:5.0,cls:"bar"},
+      {label:"Wearables",value:-2.0,cls:"neg"}
+    ]
+  }),
+  product_revenue:()=>barRows({
+    max:62,padL:140,fmt:v=>"$"+v.toFixed(1)+" mrd",
+    data:[
+      {label:"iPhone",value:56.99,cls:"hi"},
+      {label:"Services",value:30.98,cls:"pos"},
+      {label:"Mac",value:9.0,cls:"bar"},
+      {label:"iPad",value:7.5,cls:"bar"},
+      {label:"Wearables",value:6.7,cls:"bar"}
+    ]
+  }),
+  geography:()=>barRows({
+    max:55,padL:160,fmt:v=>"$"+v.toFixed(1)+" mrd",
+    data:[
+      {label:"Amériques",value:50.0,cls:"hi"},
+      {label:"Europe",value:24.4,cls:"bar"},
+      {label:"Grande Chine",value:20.5,cls:"pos"},
+      {label:"Reste Asie-Pac.",value:8.5,cls:"bar"},
+      {label:"Japon",value:7.8,cls:"bar"}
+    ]
+  }),
+  guidance:()=>columnChart({
+    height:320,yMin:107,yMax:117,ticks:[108,110,112,114,116],padL:50,
+    yfmt:v=>v.toFixed(0),fmt:v=>"$"+v.toFixed(1)+" mrd",barWidth:120,
+    data:[
+      {label:["Estimation","basse"],value:111.0,cls:"bar2"},
+      {label:["Consensus","Q3 2026"],value:112.0,cls:"hi"},
+      {label:["Estimation","haute"],value:114.0,cls:"bar"}
+    ]
+  }),
+  services_trend:()=>columnChart({
+    height:320,yMin:24,yMax:34,ticks:[24,26,28,30,32,34],padL:50,
+    yfmt:v=>v.toFixed(0),fmt:v=>"$"+v.toFixed(2)+" mrd",barWidth:100,
+    data:[
+      {label:["Q2","2025"],value:26.8,cls:"bar"},
+      {label:["Q3","2025"],value:26.2,cls:"bar"},
+      {label:["Q4","2025"],value:27.0,cls:"bar"},
+      {label:["Q1","2026"],value:29.5,cls:"hi"},
+      {label:["Q2","2026"],value:30.98,cls:"hi"}
+    ]
+  }),
+  headwinds:()=>columnChart({
+    height:360,yMin:-1.5,yMax:2.5,ticks:[-1.5,-1,-0.5,0,0.5,1,1.5,2,2.5],
+    yfmt:v=>v.toFixed(1),fmt:pct1,
+    data:[
+      {label:["Ralentissement","Chine"],value:-1.2,cls:"neg"},
+      {label:["Réglementation","UE"],value:-0.8,cls:"neg"},
+      {label:["Compression","changes"],value:-0.5,cls:"neg"},
+      {label:["Cycle","iPhone 16"],value:2.1,cls:"pos"},
+      {label:["Croissance","Services"],value:1.5,cls:"pos"},
+      {label:["Retours","de capital"],value:0.8,cls:"pos"}
+    ]
+  }),
+  margin:()=>lineArea({
+    height:320,yMin:44,yMax:51,ticks:[44,46,48,50],yfmt:v=>v.toFixed(0)+"%",
+    fmt:v=>v.toFixed(1)+"%",
+    data:[
+      {label:"Q2 2025",value:46.9},{label:"Q3 2025",value:46.3},
+      {label:"Q4 2025",value:46.9},{label:"Q1 2026",value:47.8},
+      {label:"Q2 2026",value:49.3}
+    ]
+  }),
+  revenue_abs:()=>columnChart({
+    height:330,yMin:88,yMax:136,ticks:[90,100,110,120,130],padL:50,
+    yfmt:v=>v.toFixed(0),fmt:v=>"$"+v.toFixed(1)+" mrd",barWidth:110,
+    data:[
+      {label:["Q3","2025"],value:97.4,cls:"bar"},
+      {label:["Q4","2025"],value:94.9,cls:"bar"},
+      {label:["Q1","2026"],value:130.0,cls:"hi"},
+      {label:["Q2","2026"],value:111.2,cls:"pos"}
+    ]
+  }),
+  reaction:()=>columnChart({
+    height:320,yMin:220,yMax:256,ticks:[224,232,240,248,256],padL:50,
+    yfmt:v=>v,fmt:v=>"$"+v.toFixed(2),barWidth:110,
+    data:[
+      {label:["Avant","résultats"],value:233.0,cls:"bar2"},
+      {label:["Annonce","résultats"],value:233.0,cls:"bar"},
+      {label:["Après","résultats"],value:247.0,cls:"pos"}
+    ]
+  }),
+  targetladder:()=>ladder({
+    min:170,max:325,
+    axisTicks:[190,210,230,250,270,290,310],
+    zones:[
+      {from:190,to:210,cls:"neg",label:"Scénario baissier"},
+      {from:305,to:315,cls:"pos",label:"Scénario haussier"}
+    ],
+    markers:[
+      {value:247,label:"$247,00",k:"PRIX ACTUEL",color:"ink",up:false},
+      {value:290,label:"$290",k:"OBJECTIF · RENFORCER",color:"accent",up:true}
+    ]
+  })
+};
+
+function renderAll(){document.querySelectorAll("[data-chart]").forEach(el=>{const id=el.getAttribute("data-chart");if(CHARTS[id])el.innerHTML=CHARTS[id]()})}
+window.AaplCharts={renderAll,CHARTS};
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",renderAll);
+else renderAll();
+})();
+</script>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel">
+const __TWEAKS_STYLE=`.twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;max-height:calc(100vh - 32px);display:flex;flex-direction:column;transform:scale(var(--dc-inv-zoom,1));transform-origin:bottom right;background:rgba(250,249,247,.78);color:#29261b;-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);border:.5px solid rgba(255,255,255,.6);border-radius:14px;box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 40px rgba(0,0,0,.18);font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}.twk-hd{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;cursor:move;user-select:none}.twk-hd b{font-size:12px;font-weight:600}.twk-x{appearance:none;border:0;background:transparent;color:rgba(41,38,27,.55);width:22px;height:22px;border-radius:6px;cursor:default;font-size:13px;line-height:1}.twk-x:hover{background:rgba(0,0,0,.06)}.twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;min-height:0}.twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(41,38,27,.45);padding:10px 0 0}.twk-sect:first-child{padding-top:0}.twk-seg{position:relative;display:flex;padding:2px;border-radius:8px;background:rgba(0,0,0,.06);user-select:none}.twk-seg-thumb{position:absolute;top:2px;bottom:2px;border-radius:6px;background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(0,0,0,.12);transition:left .15s cubic-bezier(.3,.7,.4,1),width .15s}.twk-seg button{appearance:none;position:relative;z-index:1;flex:1;border:0;background:transparent;color:inherit;font:inherit;font-weight:500;min-height:22px;border-radius:6px;cursor:default;padding:4px 6px;line-height:1.2}.twk-row{display:flex;flex-direction:column;gap:5px}`;
+function useTweaks(defaults){const[values,setValues]=React.useState(defaults);const setTweak=React.useCallback((k,v)=>{const edits=typeof k==='object'&&k!==null?k:{[k]:v};setValues(p=>({...p,...edits}));window.parent.postMessage({type:'__edit_mode_set_keys',edits},'*')},[]);return[values,setTweak]}
+function TweaksPanel({title='Tweaks',children}){const[open,setOpen]=React.useState(false);const dragRef=React.useRef(null);const offsetRef=React.useRef({x:16,y:16});const clamp=React.useCallback(()=>{const p=dragRef.current;if(!p)return;const w=p.offsetWidth,h=p.offsetHeight,PAD=16;offsetRef.current={x:Math.min(Math.max(PAD,window.innerWidth-w-PAD),Math.max(PAD,offsetRef.current.x)),y:Math.min(Math.max(PAD,window.innerHeight-h-PAD),Math.max(PAD,offsetRef.current.y))};p.style.right=offsetRef.current.x+'px';p.style.bottom=offsetRef.current.y+'px'},[]);React.useEffect(()=>{if(!open)return;clamp();const ro=typeof ResizeObserver!=='undefined'?new ResizeObserver(clamp):null;if(ro){ro.observe(document.documentElement);return()=>ro.disconnect()}window.addEventListener('resize',clamp);return()=>window.removeEventListener('resize',clamp)},[open,clamp]);React.useEffect(()=>{const onMsg=e=>{const t=e?.data?.type;if(t==='__activate_edit_mode')setOpen(true);else if(t==='__deactivate_edit_mode')setOpen(false)};window.addEventListener('message',onMsg);window.parent.postMessage({type:'__edit_mode_available'},'*');return()=>window.removeEventListener('message',onMsg)},[]);if(!open)return null;const onDrag=e=>{const p=dragRef.current;if(!p)return;const r=p.getBoundingClientRect(),sx=e.clientX,sy=e.clientY,sr=window.innerWidth-r.right,sb=window.innerHeight-r.bottom;const move=ev=>{offsetRef.current={x:sr-(ev.clientX-sx),y:sb-(ev.clientY-sy)};clamp()};const up=()=>{window.removeEventListener('mousemove',move);window.removeEventListener('mouseup',up)};window.addEventListener('mousemove',move);window.addEventListener('mouseup',up)};
+return(<><style>{__TWEAKS_STYLE}</style><div ref={dragRef} className="twk-panel" style={{right:offsetRef.current.x,bottom:offsetRef.current.y}}><div className="twk-hd" onMouseDown={onDrag}><b>{title}</b><button className="twk-x" onMouseDown={e=>e.stopPropagation()} onClick={()=>{setOpen(false);window.parent.postMessage({type:'__edit_mode_dismissed'},'*')}}>✕</button></div><div className="twk-body">{children}</div></div></>)}
+function TweakSection({label}){return<div className="twk-sect">{label}</div>}
+function TweakRadio({value,options,onChange}){const ref=React.useRef(null);const[drag,setDrag]=React.useState(false);const vRef=React.useRef(value);vRef.current=value;const opts=options.map(o=>typeof o==='object'?o:{value:o,label:o});const idx=Math.max(0,opts.findIndex(o=>o.value===value));const n=opts.length;const segAt=x=>{const r=ref.current.getBoundingClientRect();return opts[Math.max(0,Math.min(n-1,Math.floor(((x-r.left-2)/(r.width-4))*n)))].value};const onDown=e=>{setDrag(true);const v0=segAt(e.clientX);if(v0!==vRef.current)onChange(v0);const mv=ev=>{if(ref.current){const v=segAt(ev.clientX);if(v!==vRef.current)onChange(v)}};const up=()=>{setDrag(false);window.removeEventListener('pointermove',mv);window.removeEventListener('pointerup',up)};window.addEventListener('pointermove',mv);window.addEventListener('pointerup',up)};
+return(<div className="twk-row"><div ref={ref} role="radiogroup" onPointerDown={onDown} className={drag?'twk-seg dragging':'twk-seg'}><div className="twk-seg-thumb" style={{left:`calc(2px + ${idx} * (100% - 4px) / ${n})`,width:`calc((100% - 4px) / ${n})`}}/>{opts.map(o=><button key={o.value} type="button" role="radio" aria-checked={o.value===value}>{o.label}</button>)}</div></div>)}
+
+const TWEAK_DEFAULTS={"palette":"navy","typography":"serif-display","density":"regular"};
+const PALETTES=[{key:"navy",name:"Navy + Or",sw:["#0f1c2e","#b8901f","#f5f3ee"]},{key:"forest",name:"Vert sapin",sw:["#11302a","#0f766e","#f4f1ea"]},{key:"ink",name:"Encre + Bordeaux",sw:["#1a1a1a","#8b1e2d","#f2efe9"]},{key:"swiss",name:"Suisse épuré",sw:["#13294b","#13294b","#ffffff"]}];
+const TYPO={"Titres serif":"serif-display","Tout sans":"sans","Tout serif":"serif"};
+const TYPO_INV={"serif-display":"Titres serif","sans":"Tout sans","serif":"Tout serif"};
+const DENS={"Compact":"compact","Standard":"regular","Aéré":"comfy"};
+const DENS_INV={"compact":"Compact","regular":"Standard","comfy":"Aéré"};
+function applyTweaks(t){const r=document.documentElement;r.setAttribute("data-palette",t.palette);r.setAttribute("data-density",t.density);if(t.typography==="serif-display")r.removeAttribute("data-type");else r.setAttribute("data-type",t.typography)}
+function App(){const[t,setTweak]=useTweaks(TWEAK_DEFAULTS);React.useEffect(()=>{applyTweaks(t)},[t]);return(<TweaksPanel title="Direction visuelle"><TweakSection label="Palette"/><div style={{display:"grid",gap:7,padding:"2px 0 6px"}}>{PALETTES.map(p=>{const on=t.palette===p.key;return(<button key={p.key} onClick={()=>setTweak("palette",p.key)} style={{display:"flex",alignItems:"center",gap:10,width:"100%",padding:"8px 10px",cursor:"pointer",textAlign:"left",border:on?"1.5px solid var(--tw-fg,#0f1c2e)":"1px solid rgba(0,0,0,.14)",background:on?"rgba(0,0,0,.04)":"transparent",borderRadius:8,font:"inherit"}}><span style={{display:"inline-flex",borderRadius:4,overflow:"hidden",border:"1px solid rgba(0,0,0,.12)"}}>{p.sw.map((c,i)=><span key={i} style={{width:16,height:16,background:c}}/>)}</span><span style={{fontSize:13,fontWeight:on?600:400}}>{p.name}</span></button>)})}</div><TweakSection label="Typographie"/><TweakRadio value={TYPO_INV[t.typography]} options={Object.keys(TYPO)} onChange={v=>setTweak("typography",TYPO[v])}/><TweakSection label="Densité"/><TweakRadio value={DENS_INV[t.density]} options={Object.keys(DENS)} onChange={v=>setTweak("density",DENS[v])}/></TweaksPanel>)}
+ReactDOM.createRoot(document.getElementById("tweaks-root")).render(<App/>);
+</script>
+
+<script>
+(function(){
+  const links=[...document.querySelectorAll(".toc a")];
+  const map=new Map(links.map(a=>[a.getAttribute("href").slice(1),a]));
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove("active"));const a=map.get(e.target.id);if(a)a.classList.add("active")}})},{rootMargin:"-20% 0px -70% 0px"});
+  document.querySelectorAll(".section").forEach(s=>obs.observe(s));
+  links.forEach(a=>a.addEventListener("click",ev=>{const el=document.getElementById(a.getAttribute("href").slice(1));if(el){ev.preventDefault();window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-12,behavior:"smooth"})}}));
+})();
+</script>
+</body>
+</html>
