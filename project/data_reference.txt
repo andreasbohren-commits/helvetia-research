@@ -1,0 +1,61 @@
+ROCHE Q1 2026 — DATA REFERENCE (from original 12 charts + text)
+
+HEADER / TEAR SHEET
+- Recommendation: À CONSERVER (HOLD)
+- Objectif de prix: CHF 280,00
+- Prix actuel: CHF 254,80
+- Potentiel: +9,9%
+- P/E à terme: 12,9x (vs moyenne historique 14-15x)
+- Réaction du cours post-résultats: +2,3%
+
+CHART 1 — Croissance trimestrielle des ventes (taux constant / CER), %
+Q1 2024: 2.5 | Q2 2024: 3.2 | Q3 2024: 4.1 | Q4 2024: 5.2 | Q1 2025: 4.8 | Q2 2025: 5.5 | Q4 2025: 6.8 | Q1 2026: 6.0
+(highlight last two; reference line at 6.0 = Q1 2026)
+
+CHART 2 — Performance des divisions Q1 2026 (CER %)
+Pharma: +7.0 (highlight) | Diagnostics: +3.0
+
+CHART 3 — Impact devises: CER vs CHF publié (%)
+Q1 2025: CER 4.8 / CHF -2.1
+Q4 2025: CER 6.8 / CHF 1.5
+Q1 2026: CER 6.0 / CHF -5.0
+
+CHART 4 — Taux de croissance principaux produits Q1 2026 (%)
+Xolair: +26.0 (highlight) | Oncologie & Hématologie: +8.0 | Immunologie: +5.0 | Soins de spécialité: +3.5
+
+CHART 5 — Statut des orientations 2026
+Croissance des ventes: Maintenue (chiffre moyen / mid-single digit)
+Croissance BPA (EPS): Maintenue (chiffre élevé / high-single digit)
+
+CHART 6 — Impact biosimilaire LOE par molécule (CHF m)
+Herceptin: 320 | Avastin: 250 | MabThera: 210 | Lucentis: 140 | Other: 100 | Actemra: 80
+(total ~CHF 1,1 mrd; narrative ~CHF 1,0 mrd)
+
+CHART 7 — Estimations de consensus ventes 2026 (CHF mrd)
+Bas: 59.5 | Moyen: 61.47 | Haut: 63.5
+
+CHART 8 — Opportunité de pipeline (CHF mrd)
+Phase III: 5.9 (highlight) | Phase II: 2.8 | Phase I: 1.2
+(narrative: pipeline CHF 5,9 mrd d'opportunités)
+
+CHART 9 — Vents contraires vs opportunités 2026 (impact estimé %)
+Biosimilaire LOE: -1.0 | Force CHF: -0.7 | Croissance pipeline: +1.2 | Expansion US: +0.8 | Amélioration marge: +0.6
+
+CHART 10 — Évolution de la marge de résultat core (%)
+Q1 2025: 32.5 | Q4 2025: 34.2 | Q1 2026: 33.8
+
+CHART 11 — Ventes trimestrielles en CHF publié (CHF mrd)
+Q1 2025: 15.5 | Q4 2025: 16.2 | Q1 2026: 14.7
+
+CHART 12 — Réaction du cours (+2,3%) — note: source chart used /10 scale (24.90->25.48).
+Use consistent with current price 254.80: Avant 254.80? Better: relative move +2.3%.
+Suggested display: Avant 249.0 / Annonce 249.0 / Après 254.8 (+2.3%) — keep current price 254.80 consistent.
+
+KEY NARRATIVE FACTS (French, from text)
+- Q1 dépasse consensus: +6.0% CER vs +5.2% attendu (+80 pdb). Pharma +7.0% (consensus +6.3%).
+- Vents de change -11 pdb. Orientations 2026 maintenues.
+- Pipeline CHF 5,9 mrd d'opportunités, compensé en partie par CHF 1,0 mrd impact biosimilaire.
+- Oncologie-hématologie = 40% des ventes, +8.0%. Immunologie +5.0%. Spécialité +3.5%. Xolair +26.0% (biosimilaire attendu H2 2026).
+- Bull case CHF 300+: réévaluation vers 14-15x P/E => CHF 295-320 (+16-25%).
+- Bear case CHF 220: LOE CHF 1mrd, devises fortes, biosimilaire Xolair agressif, récession US (>60% ventes), multiple 11-12x => CHF 220-240.
+- Base case (À CONSERVER): croissance organique 3,5-4,0% 2026; BPA +6,5-7,5%; multiple 13,2-13,5x => CHF 275-290.
