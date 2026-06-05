@@ -356,8 +356,9 @@ def build_charts_config(data: dict) -> dict:
     # 1. Segments — barRows
     segs = charts["segments"]
     seg_max = max(d["value"] for d in segs["data"])
+    seg_pad_l = max(160, max(len(d["label"]) for d in segs["data"]) * 8 + 24)
     cfg["segments"] = {
-        "type": "barRows", "padL": 160,
+        "type": "barRows", "padL": seg_pad_l,
         "max": round(seg_max * 1.14, 2),
         "fmt": segs["fmt_type"],
         "data": segs["data"]
@@ -366,8 +367,9 @@ def build_charts_config(data: dict) -> dict:
     # 2. Peer comparison — barRows
     peer = charts["peer_comparison"]
     peer_max = max(d["value"] for d in peer["data"])
+    peer_pad_l = max(175, max(len(d["label"]) for d in peer["data"]) * 8 + 24)
     cfg["peer_comparison"] = {
-        "type": "barRows", "padL": 175,
+        "type": "barRows", "padL": peer_pad_l,
         "max": round(peer_max * 1.16, 2),
         "fmt": peer["fmt_type"],
         "data": peer["data"]

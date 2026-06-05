@@ -170,7 +170,8 @@ body.report-mode #report-wrap{display:block}
 .kp .kp-ix{font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--c-accent);line-height:1}
 .kp p{font-size:14.5px;color:var(--c-ink-2)}
 .kp p strong{color:var(--c-ink)}
-.figure{margin:calc(26px * var(--space)) 0;border:1px solid var(--c-rule);background:var(--c-paper)}
+.figure{margin:calc(26px * var(--space)) 0;border:1px solid var(--c-rule);background:var(--c-paper);overflow:hidden}
+.fig-grid>*{min-width:0}
 .fig-cap{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:13px 18px 12px;border-bottom:1px solid var(--c-rule)}
 .fig-cap .ttl{font-family:var(--font-display);font-size:15.5px;font-weight:600;color:var(--c-ink)}
 .fig-cap .ex{font-family:var(--font-mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--c-faint);white-space:nowrap}
@@ -477,11 +478,13 @@ function buildChartsConfig(data) {
 
   const segs = ch.segments;
   const segMax = Math.max(...segs.data.map(d => d.value));
-  cfg.segments = {type:'barRows', padL:160, max:Math.round(segMax*1.14*100)/100, fmt:segs.fmt_type, data:segs.data};
+  const segPadL = Math.max(160, Math.max(...segs.data.map(d => d.label.length)) * 8 + 24);
+  cfg.segments = {type:'barRows', padL:segPadL, max:Math.round(segMax*1.14*100)/100, fmt:segs.fmt_type, data:segs.data};
 
   const peer = ch.peer_comparison;
   const peerMax = Math.max(...peer.data.map(d => d.value));
-  cfg.peer_comparison = {type:'barRows', padL:175, max:Math.round(peerMax*1.16*100)/100, fmt:peer.fmt_type, data:peer.data};
+  const peerPadL = Math.max(175, Math.max(...peer.data.map(d => d.label.length)) * 8 + 24);
+  cfg.peer_comparison = {type:'barRows', padL:peerPadL, max:Math.round(peerMax*1.16*100)/100, fmt:peer.fmt_type, data:peer.data};
 
   const rev = ch.revenue_trend;
   const [revMin, revMax] = autoRange(rev.data.map(d => d.value), true);
