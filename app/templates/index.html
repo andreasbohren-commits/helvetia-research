@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Helvetia Research — Generate Equity Note</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:#ebe6da;color:#0f1c2e;font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+
+/* ── Header ──────────────────────────────────────────────────────────── */
+.topbar{background:#0f1c2e;padding:18px 32px;display:flex;align-items:center;gap:14px}
+.mark{width:32px;height:32px;flex:none}
+.mark .acc{fill:#b8901f}
+.mark .cut{fill:#2c2208}
+.brand-text{display:flex;flex-direction:column;line-height:1.05}
+.brand-text b{font-family:"Source Serif 4",Georgia,serif;font-size:17px;font-weight:600;letter-spacing:.14em;color:#fff}
+.brand-text span{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.32em;color:#b8901f;text-transform:uppercase;margin-top:3px}
+
+/* ── Main card ───────────────────────────────────────────────────────── */
+.main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 16px}
+.card{background:#fff;max-width:520px;width:100%;padding:48px 48px 44px;box-shadow:0 1px 2px rgba(15,28,46,.04),0 18px 50px -28px rgba(15,28,46,.28);border:1px solid #ece7dc}
+.card-eyebrow{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#9a7619;margin-bottom:18px}
+.card-title{font-family:"Source Serif 4",Georgia,serif;font-size:clamp(26px,5vw,34px);font-weight:600;line-height:1.08;letter-spacing:-.015em;color:#0f1c2e;margin-bottom:10px}
+.card-sub{font-size:14.5px;line-height:1.55;color:#5d6b7a;margin-bottom:36px;max-width:36ch}
+
+label{display:block;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8a96a3;margin-bottom:8px}
+
+.input-wrap{position:relative;margin-bottom:28px}
+input[type=text]{width:100%;height:52px;padding:0 18px;border:1.5px solid #d8d2c6;background:#fff;color:#0f1c2e;font-family:"IBM Plex Sans",sans-serif;font-size:17px;outline:none;transition:border-color .15s;border-radius:0}
+input[type=text]:focus{border-color:#0f1c2e}
+input[type=text]::placeholder{color:#c0bab0}
+
+.btn{width:100%;height:52px;background:#0f1c2e;color:#f3efe6;border:none;font-family:"Source Serif 4",Georgia,serif;font-size:17px;font-weight:600;letter-spacing:.02em;cursor:pointer;transition:background .15s;display:flex;align-items:center;justify-content:center;gap:10px}
+.btn:hover:not(:disabled){background:#1e2f45}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn .spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none}
+.btn.loading .spinner{display:block}
+.btn.loading .btn-text{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.hint{margin-top:16px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:#8a96a3;letter-spacing:.04em;text-align:center}
+.hint span{color:#b8901f}
+
+.error-box{margin-top:24px;border-left:3px solid #9a2b22;background:#f4e6e2;padding:16px 18px;display:none}
+.error-box p{font-size:13.5px;color:#7a1a12;line-height:1.5;margin:0}
+.error-box pre{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:#7a1a12;margin:8px 0 0;white-space:pre-wrap}
+
+.api-warn{background:#fff3cd;border:1px solid #f0c040;padding:16px 18px;margin-bottom:28px}
+.api-warn p{font-size:13px;line-height:1.6;color:#6b4c00;margin:0}
+.api-warn code{font-family:"IBM Plex Mono",monospace;background:#f0c040;padding:1px 5px;font-size:12px}
+
+/* ── Examples ────────────────────────────────────────────────────────── */
+.examples{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+.ex-lbl{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8a96a3;width:100%;margin-bottom:2px}
+.chip{padding:6px 13px;border:1px solid #d8d2c6;background:transparent;color:#5d6b7a;font-family:"IBM Plex Mono",monospace;font-size:11.5px;cursor:pointer;transition:all .12s}
+.chip:hover{border-color:#0f1c2e;color:#0f1c2e;background:#f6f3ec}
+
+/* ── Footer ──────────────────────────────────────────────────────────── */
+footer{padding:20px 32px;font-family:"IBM Plex Mono",monospace;font-size:10px;color:#8a96a3;letter-spacing:.08em;text-align:center}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+    <rect class="acc" x="0" y="0" width="32" height="32"/>
+    <rect class="cut" x="13.5" y="5.5" width="5" height="21"/>
+    <rect class="cut" x="5.5" y="13.5" width="21" height="5"/>
+  </svg>
+  <div class="brand-text">
+    <b>HELVETIA</b>
+    <span>Research · Geneva</span>
+  </div>
+</header>
+
+<main class="main">
+  <div class="card">
+    <div class="card-eyebrow">Equity Research Generator</div>
+    <h1 class="card-title">Generate an<br>equity research note</h1>
+    <p class="card-sub">Enter any public company name or ticker. Claude will produce a full institutional-grade initiation note.</p>
+
+    {% if not api_key_set %}
+    <div class="api-warn">
+      <p><strong>ANTHROPIC_API_KEY is not set.</strong><br>
+      Start the app with your key:<br>
+      <code>ANTHROPIC_API_KEY=sk-ant-... python app.py</code></p>
+    </div>
+    {% endif %}
+
+    <form id="gen-form">
+      <label for="query">Company name or ticker symbol</label>
+      <div class="input-wrap">
+        <input type="text" id="query" name="query"
+               placeholder="e.g. Apple, MSFT, Nestlé, 2330.TW"
+               autocomplete="off" spellcheck="false"
+               {% if not api_key_set %}disabled{% endif %}>
+      </div>
+      <button type="submit" class="btn" id="submit-btn" {% if not api_key_set %}disabled{% endif %}>
+        <div class="spinner"></div>
+        <span class="btn-text">Generate Report</span>
+      </button>
+    </form>
+
+    <div class="examples">
+      <span class="ex-lbl">Try these</span>
+      <button class="chip" onclick="fillExample('NVIDIA')">NVIDIA</button>
+      <button class="chip" onclick="fillExample('Apple')">Apple</button>
+      <button class="chip" onclick="fillExample('ASML')">ASML</button>
+      <button class="chip" onclick="fillExample('Nestlé')">Nestlé</button>
+      <button class="chip" onclick="fillExample('JPMorgan Chase')">JPMorgan</button>
+      <button class="chip" onclick="fillExample('LVMH')">LVMH</button>
+    </div>
+
+    <div class="error-box" id="error-box">
+      <p id="error-text"></p>
+    </div>
+
+    <p class="hint">Generation takes ~30 seconds &nbsp;·&nbsp; <span>Powered by Claude</span></p>
+  </div>
+</main>
+
+<footer>© 2026 Helvetia Research · Illustrative purposes only · Not investment advice</footer>
+
+<script>
+function fillExample(name) {
+  const q = document.getElementById('query');
+  q.value = name;
+  q.focus();
+}
+
+document.getElementById('gen-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const query = document.getElementById('query').value.trim();
+  if (!query) return;
+
+  const btn = document.getElementById('submit-btn');
+  const errorBox = document.getElementById('error-box');
+
+  btn.disabled = true;
+  btn.classList.add('loading');
+  errorBox.style.display = 'none';
+
+  try {
+    const formData = new FormData(this);
+    const resp = await fetch('/generate', { method: 'POST', body: formData });
+
+    if (resp.ok) {
+      const html = await resp.text();
+      // Replace the current page with the rendered report
+      document.open();
+      document.write(html);
+      document.close();
+    } else {
+      const err = await resp.text();
+      document.getElementById('error-text').textContent = err;
+      errorBox.style.display = 'block';
+    }
+  } catch (err) {
+    document.getElementById('error-text').textContent = 'Network error: ' + err.message;
+    errorBox.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.classList.remove('loading');
+  }
+});
+
+// Submit on Enter
+document.getElementById('query').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    document.getElementById('gen-form').dispatchEvent(new Event('submit'));
+  }
+});
+</script>
+
+</body>
+</html>
