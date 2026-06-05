@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en" data-palette="navy" data-density="regular">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zurich Insurance Group — Equity Research · Initiation · Helvetia Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --c-ink:#0f1c2e;--c-ink-2:#2b3a4d;--c-muted:#5d6b7a;--c-faint:#8a96a3;
+  --c-rule:#d8d2c6;--c-rule-soft:#ece7dc;--c-paper:#ffffff;--c-canvas:#ebe6da;
+  --c-panel:#f6f3ec;--c-accent:#b8901f;--c-accent-2:#9a7619;--c-accent-ink:#2c2208;
+  --c-pos:#1f6f54;--c-pos-soft:#e3efe8;--c-neg:#9a2b22;--c-neg-soft:#f4e6e2;
+  --c-bar:#33485f;--c-bar-2:#8ea0b0;--c-grid:#e7e1d4;
+  --font-display:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --font-body:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --font-mono:"IBM Plex Mono","SFMono-Regular",ui-monospace,monospace;
+  --font-num:var(--font-mono);
+  --space:1;--base-fs:16px;--col-max:940px;
+  --shadow-sheet:0 1px 2px rgba(15,28,46,.04),0 18px 50px -28px rgba(15,28,46,.28);
+}
+html[data-palette="forest"]{--c-ink:#11302a;--c-ink-2:#244a42;--c-muted:#56685f;--c-faint:#8a9890;--c-rule:#cdd6cf;--c-rule-soft:#e2e9e2;--c-canvas:#e3e8e0;--c-panel:#eef2ea;--c-accent:#0f766e;--c-accent-2:#0c5f58;--c-accent-ink:#ffffff;--c-pos:#166e4f;--c-pos-soft:#e0efe7;--c-neg:#9a4318;--c-neg-soft:#f4e7df;--c-bar:#2c5048;--c-bar-2:#8aa69d;--c-grid:#e0e7df}
+html[data-palette="ink"]{--c-ink:#1a1a1a;--c-ink-2:#2f2f2f;--c-muted:#6a6a6a;--c-faint:#9a9a9a;--c-rule:#d9d3cb;--c-rule-soft:#ece7df;--c-canvas:#e6e1d8;--c-panel:#f3efe8;--c-accent:#8b1e2d;--c-accent-2:#771826;--c-accent-ink:#ffffff;--c-pos:#2f6d3b;--c-pos-soft:#e6efe5;--c-neg:#8b1e2d;--c-neg-soft:#f3e3e3;--c-bar:#3a3a3a;--c-bar-2:#9a9a9a;--c-grid:#e8e2d8}
+html[data-palette="swiss"]{--c-ink:#13294b;--c-ink-2:#2a3c5c;--c-muted:#5b6678;--c-faint:#98a1b0;--c-rule:#dcdee3;--c-rule-soft:#eef0f3;--c-canvas:#f4f5f7;--c-panel:#f2f4f7;--c-accent:#13294b;--c-accent-2:#0c1c38;--c-accent-ink:#ffffff;--c-pos:#157347;--c-pos-soft:#e5f0ea;--c-neg:#b42318;--c-neg-soft:#f7e6e4;--c-bar:#2a3c5c;--c-bar-2:#9aa6ba;--c-grid:#e7e9ee;--shadow-sheet:0 1px 2px rgba(19,41,75,.05),0 14px 40px -26px rgba(19,41,75,.22)}
+html[data-type="sans"]{--font-display:"IBM Plex Sans",system-ui,sans-serif}
+html[data-type="serif"]{--font-body:"Source Serif 4",Georgia,serif;--font-display:"Source Serif 4",Georgia,serif}
+html[data-density="compact"]{--space:.82;--base-fs:15px}
+html[data-density="regular"]{--space:1;--base-fs:16px}
+html[data-density="comfy"]{--space:1.2;--base-fs:16.5px}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--c-canvas);color:var(--c-ink);font-family:var(--font-body);font-size:var(--base-fs);line-height:1.62;font-feature-settings:"kern" 1,"liga" 1;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,h4{margin:0;font-weight:600;line-height:1.12;letter-spacing:-.01em}
+p{margin:0;text-wrap:pretty}
+a{color:inherit}
+sup{font-size:.62em}
+.num{font-family:var(--font-num);font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.mono{font-family:var(--font-mono)}
+.pos{color:var(--c-pos)}
+.neg{color:var(--c-neg)}
+.desk{padding:clamp(0px,4vw,56px) 16px 96px}
+.sheet{max-width:var(--col-max);margin:0 auto;background:var(--c-paper);box-shadow:var(--shadow-sheet);border:1px solid var(--c-rule-soft)}
+.pad{padding-left:clamp(22px,5vw,64px);padding-right:clamp(22px,5vw,64px)}
+.masthead{background:var(--c-ink);color:#f3efe6;padding:18px clamp(22px,5vw,64px) 16px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:13px}
+.brand .mark{width:34px;height:34px;flex:none}
+.brand .mark .acc{fill:var(--c-accent)}
+.brand .mark .cut{fill:var(--c-accent-ink)}
+.brand .wm{display:flex;flex-direction:column;line-height:1.05}
+.brand .wm b{font-family:var(--font-display);font-weight:600;font-size:19px;letter-spacing:.14em;color:#fff}
+.brand .wm span{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.34em;color:var(--c-accent);margin-top:3px;text-transform:uppercase}
+.masthead .mh-right{text-align:right;font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;color:#b9c2cd;text-transform:uppercase;line-height:1.7}
+.masthead .mh-right b{color:var(--c-accent);font-weight:500}
+.goldrule{height:3px;background:var(--c-accent)}
+.goldrule.thin{height:2px}
+.titleblock{padding-top:calc(38px * var(--space));padding-bottom:calc(26px * var(--space))}
+.eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--c-accent-2);display:flex;gap:12px;align-items:center}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--c-rule)}
+.doc-title{font-family:var(--font-display);font-weight:600;font-size:clamp(34px,5.4vw,54px);line-height:1.02;margin-top:16px;letter-spacing:-.02em;color:var(--c-ink)}
+.doc-sub{margin-top:14px;font-size:17px;color:var(--c-muted);max-width:60ch;line-height:1.5}
+.doc-meta{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px 26px;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--c-faint);text-transform:uppercase}
+.doc-meta span b{color:var(--c-ink-2);font-weight:500}
+.tearsheet{border-top:2px solid var(--c-ink);border-bottom:1px solid var(--c-rule);display:grid;grid-template-columns:1.05fr 1fr}
+.tearsheet>div{padding:calc(26px * var(--space)) clamp(22px,5vw,64px)}
+.ts-left{border-right:1px solid var(--c-rule)}
+.ts-company{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ts-company .name{font-family:var(--font-display);font-size:23px;font-weight:600;color:var(--c-ink)}
+.ts-company .tick{font-family:var(--font-mono);font-size:12px;color:var(--c-paper);background:var(--c-ink);padding:3px 8px;letter-spacing:.06em}
+.ts-sector{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--c-faint);margin-top:8px}
+.call{margin-top:22px;display:flex;align-items:flex-end;gap:22px;flex-wrap:wrap}
+.rating-badge{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;background:var(--c-accent);color:var(--c-accent-ink);padding:12px 20px;min-width:130px}
+.rating-badge .lbl{font-family:var(--font-mono);font-size:9px;letter-spacing:.24em;text-transform:uppercase;opacity:.8}
+.rating-badge .val{font-family:var(--font-display);font-size:26px;font-weight:600;letter-spacing:.01em;margin-top:2px}
+.call .figs{display:flex;gap:28px}
+.fig .k{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--c-faint)}
+.fig .v{font-family:var(--font-display);font-size:27px;font-weight:600;color:var(--c-ink);margin-top:3px}
+.fig .v small{font-size:13px;font-family:var(--font-mono);color:var(--c-muted);font-weight:500}
+.fig .v.up{color:var(--c-pos)}
+.recscale{margin-top:4px}
+.recscale .scale-lbl{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--c-faint);margin-bottom:12px}
+.scale-track{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.scale-seg{height:8px;background:var(--c-rule);position:relative}
+.scale-seg.active{background:var(--c-accent)}
+.scale-names{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-top:9px}
+.scale-names span{font-family:var(--font-mono);font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--c-faint);text-align:center}
+.scale-names span.on{color:var(--c-ink);font-weight:600}
+.statgrid{margin-top:26px;display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--c-rule);border-left:1px solid var(--c-rule)}
+.stat{border-right:1px solid var(--c-rule);border-bottom:1px solid var(--c-rule);padding:11px 14px}
+.stat .k{font-family:var(--font-mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--c-faint)}
+.stat .v{font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--c-ink);margin-top:4px}
+.stat .v small{font-family:var(--font-mono);font-size:11px;color:var(--c-muted)}
+.layout{display:grid;grid-template-columns:210px 1fr;align-items:start}
+.toc{position:sticky;top:0;align-self:start;padding:calc(40px * var(--space)) 26px calc(40px * var(--space)) clamp(22px,5vw,64px);border-right:1px solid var(--c-rule-soft)}
+.toc h4{font-family:var(--font-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--c-faint);margin-bottom:16px}
+.toc ol{list-style:none;margin:0;padding:0;counter-reset:toc}
+.toc li{counter-increment:toc;margin:0 0 2px}
+.toc a{display:flex;gap:10px;text-decoration:none;color:var(--c-muted);font-size:13px;padding:5px 0;line-height:1.3;transition:color .15s;border-bottom:1px solid transparent}
+.toc a::before{content:counter(toc,decimal-leading-zero);font-family:var(--font-mono);font-size:10px;color:var(--c-accent-2);padding-top:2px}
+.toc a:hover{color:var(--c-ink)}
+.toc a.active{color:var(--c-ink);font-weight:600}
+.flow{padding:calc(40px * var(--space)) clamp(22px,5vw,64px) calc(40px * var(--space)) calc(38px * var(--space));min-width:0}
+.section{scroll-margin-top:16px}
+.section+.section{margin-top:calc(46px * var(--space))}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:calc(20px * var(--space))}
+.sec-num{font-family:var(--font-mono);font-size:12px;color:var(--c-accent-2);letter-spacing:.1em;padding-top:4px}
+.sec-title{font-family:var(--font-display);font-size:clamp(24px,3.4vw,32px);font-weight:600;color:var(--c-ink);letter-spacing:-.015em}
+.sec-rule{height:1px;background:var(--c-rule);margin-bottom:calc(22px * var(--space))}
+.subhead{font-family:var(--font-body);font-weight:600;font-size:13px;letter-spacing:.04em;color:var(--c-accent-2);text-transform:uppercase;margin:calc(26px * var(--space)) 0 10px;display:flex;align-items:center;gap:10px}
+.subhead::before{content:"";width:18px;height:2px;background:var(--c-accent);flex:none}
+.prose{font-size:15.5px;line-height:1.66;color:var(--c-ink-2);max-width:68ch}
+.prose+.prose{margin-top:14px}
+.prose strong{color:var(--c-ink);font-weight:600}
+.lead{font-size:18px;line-height:1.58;color:var(--c-ink);max-width:64ch}
+.lead .drop{color:var(--c-accent-2);font-weight:600}
+.hl{color:var(--c-ink);font-weight:600;font-family:var(--font-num);font-variant-numeric:tabular-nums}
+.keypoints{display:grid;gap:1px;background:var(--c-rule);border:1px solid var(--c-rule);margin-top:6px}
+.kp{background:var(--c-paper);padding:16px 18px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.kp .kp-ix{font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--c-accent);line-height:1}
+.kp p{font-size:14.5px;color:var(--c-ink-2)}
+.kp p b{color:var(--c-ink)}
+.figure{margin:calc(26px * var(--space)) 0;border:1px solid var(--c-rule);background:var(--c-paper)}
+.fig-cap{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:13px 18px 12px;border-bottom:1px solid var(--c-rule)}
+.fig-cap .ttl{font-family:var(--font-display);font-size:15.5px;font-weight:600;color:var(--c-ink)}
+.fig-cap .ex{font-family:var(--font-mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--c-faint);white-space:nowrap}
+.fig-body{padding:20px 18px 16px}
+.fig-note{padding:0 18px 14px;font-family:var(--font-mono);font-size:10px;color:var(--c-faint);letter-spacing:.02em;line-height:1.5}
+.fig-note b{color:var(--c-muted);font-weight:500}
+.svgchart{width:100%;height:auto;display:block;font-family:var(--font-mono)}
+.svgchart text{fill:var(--c-muted)}
+.svgchart .baseline{stroke:var(--c-ink)}
+.svgchart .val{fill:var(--c-ink);font-weight:600}
+.svgchart .cat{fill:var(--c-muted)}
+.svgchart .bar{fill:var(--c-bar)}
+.svgchart .bar.hi{fill:var(--c-accent)}
+.svgchart .bar.pos{fill:var(--c-pos)}
+.svgchart .bar.neg{fill:var(--c-neg)}
+.svgchart .bar2{fill:var(--c-bar-2)}
+.svgchart .gl{stroke:var(--c-grid);stroke-width:1}
+.svgchart .glabel{fill:var(--c-faint)}
+.svgchart .refline{stroke:var(--c-accent);stroke-dasharray:4 4;stroke-width:1.4}
+.svgchart .area{fill:var(--c-accent);opacity:.1}
+.svgchart .line{stroke:var(--c-ink);fill:none;stroke-width:2.5}
+.svgchart .dot{fill:var(--c-ink)}
+.fig-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:calc(26px * var(--space)) 0}
+@media(max-width:720px){.fig-grid{grid-template-columns:1fr}}
+.legend{display:flex;gap:18px;padding:11px 18px 4px;flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;color:var(--c-muted);text-transform:uppercase}
+.legend i{width:11px;height:11px;display:inline-block}
+.legend i.s1{background:var(--c-pos)}.legend i.s2{background:var(--c-neg)}
+.legend i.bar{background:var(--c-bar)}.legend i.hi{background:var(--c-accent)}
+.tbl{width:100%;border-collapse:collapse;margin:calc(20px * var(--space)) 0;font-size:14px}
+.tbl caption{text-align:left;font-family:var(--font-mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--c-faint);padding-bottom:9px}
+.tbl th{text-align:left;font-family:var(--font-mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-faint);font-weight:500;padding:9px 12px;border-bottom:1.5px solid var(--c-ink)}
+.tbl td{padding:11px 12px;border-bottom:1px solid var(--c-rule-soft);color:var(--c-ink-2)}
+.tbl td:first-child,.tbl th:first-child{padding-left:0}
+.tbl td:last-child,.tbl th:last-child{padding-right:0;text-align:right}
+.tbl tr td b{color:var(--c-ink)}
+.statusrow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+@media(max-width:640px){.statusrow{grid-template-columns:1fr}}
+.statuscard{border:1px solid var(--c-rule);padding:18px;position:relative;overflow:hidden}
+.statuscard .k{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--c-faint)}
+.statuscard .guide{font-family:var(--font-display);font-size:21px;font-weight:600;color:var(--c-ink);margin-top:8px}
+.statuscard .tag{display:inline-flex;align-items:center;gap:7px;margin-top:12px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-pos);font-weight:600}
+.statuscard .tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c-pos)}
+.statuscard .barbg{position:absolute;right:-10px;bottom:-12px;font-family:var(--font-display);font-size:86px;font-weight:700;color:var(--c-rule-soft);line-height:1}
+.scenarios{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+@media(max-width:760px){.scenarios{grid-template-columns:1fr}}
+.scn{border:1px solid var(--c-rule);border-top:3px solid var(--c-bar);padding:18px 18px 20px;display:flex;flex-direction:column}
+.scn.bull{border-top-color:var(--c-pos)}.scn.base{border-top-color:var(--c-accent)}.scn.bear{border-top-color:var(--c-neg)}
+.scn .scn-k{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--c-faint)}
+.scn .scn-px{font-family:var(--font-display);font-size:25px;font-weight:600;color:var(--c-ink);margin-top:8px;line-height:1.12;white-space:nowrap}
+.scn .scn-name{font-size:12.5px;font-weight:600;margin-top:9px;letter-spacing:.01em}
+.scn.bull .scn-name{color:var(--c-pos)}.scn.base .scn-name{color:var(--c-accent-2)}.scn.bear .scn-name{color:var(--c-neg)}
+.scn p{font-size:13px;line-height:1.55;color:var(--c-ink-2);margin-top:12px}
+.scn .scn-up{margin-top:auto;padding-top:14px;font-family:var(--font-mono);font-size:11px;color:var(--c-muted);letter-spacing:.04em}
+.ladder{margin:calc(24px * var(--space)) 0}
+.callout{border-left:3px solid var(--c-accent);background:var(--c-panel);padding:20px 24px;margin:calc(22px * var(--space)) 0}
+.callout p{font-size:15.5px;line-height:1.6;color:var(--c-ink)}
+.bigquote{font-family:var(--font-display);font-size:clamp(20px,2.6vw,26px);line-height:1.32;color:var(--c-ink);font-weight:600;letter-spacing:-.01em;max-width:28ch}
+.colophon{border-top:2px solid var(--c-ink);padding:calc(28px * var(--space)) clamp(22px,5vw,64px);background:var(--c-paper)}
+.colophon .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.disclaimer{font-family:var(--font-mono);font-size:9.5px;line-height:1.7;color:var(--c-faint);letter-spacing:.01em;max-width:90ch}
+.disclaimer b{color:var(--c-muted);font-weight:500}
+@media(max-width:860px){
+  .tearsheet{grid-template-columns:1fr}.ts-left{border-right:none;border-bottom:1px solid var(--c-rule)}
+  .layout{grid-template-columns:1fr}.toc{position:static;border-right:none;border-bottom:1px solid var(--c-rule-soft);padding-bottom:20px}
+  .toc ol{columns:2}.flow{padding-left:clamp(22px,5vw,64px)}
+}
+@media(max-width:560px){.call{gap:16px}.call .figs{gap:18px}.statgrid{grid-template-columns:1fr}.toc ol{columns:1}}
+@media print{
+  @page{size:A4 portrait;margin:13mm 12mm}
+  html,body{background:#fff}body{font-size:10pt;line-height:1.5}
+  .desk{padding:0}.sheet{box-shadow:none;border:none;max-width:none;width:100%}
+  #tweaks-root,.tweaks-host,.tweaks-fab{display:none!important}
+  .layout{display:grid;grid-template-columns:150px 1fr;column-gap:22px}
+  .toc{position:static;border-right:1px solid var(--c-rule);border-bottom:none;padding:2px 18px 0 0;margin:0}
+  .toc ol{columns:1}.toc a{break-inside:avoid}.flow{display:block;padding:0;min-width:0}
+  .figure{width:100%}.svgchart,.figure svg,img{max-width:100%;height:auto}.fig-grid{gap:14px}
+  .figure,.scn,.statuscard,.kp,.tbl,.callout,.scenarios,.statusrow,.fig-grid,.ladder{break-inside:avoid}
+  .sec-head,h1,h2,h3,h4{break-after:avoid}.doc-title{break-after:avoid}a{text-decoration:none;color:inherit}
+  .masthead,.goldrule,.rating-badge,.scale-seg,.scale-seg.active,.svgchart,.scn,.statuscard,.callout,.ts-company .tick,.tearsheet,.colophon{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<div class="desk">
+<article class="sheet">
+
+  <header class="masthead">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 34 34" aria-hidden="true">
+        <rect class="acc" x="0" y="0" width="34" height="34"/>
+        <rect class="cut" x="14.5" y="6" width="5" height="22"/>
+        <rect class="cut" x="6" y="14.5" width="22" height="5"/>
+      </svg>
+      <span class="wm"><b>HELVETIA</b><span>Research · Geneva</span></span>
+    </div>
+    <div class="mh-right">
+      Equity Research &nbsp;·&nbsp; Switzerland<br>
+      Insurance &nbsp;·&nbsp; <b>Initiation of Coverage</b>
+    </div>
+  </header>
+  <div class="goldrule"></div>
+
+  <div class="pad titleblock">
+    <div class="eyebrow">Equity Research · Initiation of Coverage</div>
+    <h1 class="doc-title">Fortress capital, record ROE,<br>and a transformational acquisition</h1>
+    <p class="doc-sub">Zurich's 2025 record performance validates a decade of management discipline. The $10.9B Beazley deal opens a $134B specialty TAM. At 14.2x 2026E EPS, we see 28% upside — initiating Overweight with a $680 price target.</p>
+    <div class="doc-meta">
+      <span><b>Zurich Insurance Group AG</b></span>
+      <span>Ticker&nbsp; <b>ZURN / ZURVY</b></span>
+      <span>Published&nbsp; <b>June 5, 2026</b></span>
+      <span>Analyst&nbsp; <b>Financials Desk · Helvetia Research</b></span>
+    </div>
+  </div>
+
+  <section class="tearsheet" aria-label="Recommendation Summary">
+    <div class="ts-left">
+      <div class="ts-company">
+        <span class="name">Zurich Insurance Group</span>
+        <span class="tick">ZURN</span>
+      </div>
+      <div class="ts-sector">SIX Swiss Exchange / NYSE ADR · Insurance · Common Equity</div>
+
+      <div class="call">
+        <div class="rating-badge">
+          <span class="lbl">Recommendation</span>
+          <span class="val">Overweight</span>
+        </div>
+        <div class="figs">
+          <div class="fig">
+            <div class="k">Target</div>
+            <div class="v"><span class="num">680</span><small> $</small></div>
+          </div>
+          <div class="fig">
+            <div class="k">Price</div>
+            <div class="v"><span class="num">530</span><small> $</small></div>
+          </div>
+          <div class="fig">
+            <div class="k">Upside</div>
+            <div class="v up num">+28.3%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="recscale" style="margin-top:26px">
+        <div class="scale-lbl">Rating Scale</div>
+        <div class="scale-track">
+          <div class="scale-seg"></div><div class="scale-seg"></div>
+          <div class="scale-seg"></div><div class="scale-seg active"></div>
+          <div class="scale-seg"></div>
+        </div>
+        <div class="scale-names">
+          <span>Sell</span><span>Reduce</span><span>Hold</span><span class="on">Overweight</span><span>Buy</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ts-right">
+      <div class="scale-lbl" style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--c-faint)">Key Metrics · FY2025</div>
+      <div class="statgrid">
+        <div class="stat"><div class="k">2025 GWP</div><div class="v num">$99.1<small>B</small></div></div>
+        <div class="stat"><div class="k">GWP Growth</div><div class="v num pos">+7.7%</div></div>
+        <div class="stat"><div class="k">Core ROE</div><div class="v num">26.3%</div></div>
+        <div class="stat"><div class="k">P&amp;C Combined Ratio</div><div class="v num">92.6%</div></div>
+        <div class="stat"><div class="k">2025 Net Income</div><div class="v num">$6.8<small>B</small></div></div>
+        <div class="stat"><div class="k">Capital Ratio (SST)</div><div class="v num">265%</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Contents">
+      <h4>Contents</h4>
+      <ol>
+        <li><a href="#s1">Investment Thesis</a></li>
+        <li><a href="#s2">Business Model</a></li>
+        <li><a href="#s3">Financial Performance</a></li>
+        <li><a href="#s4">Investment Analysis</a></li>
+        <li><a href="#s5">Conclusion</a></li>
+      </ol>
+    </nav>
+
+    <main class="flow">
+
+      <!-- 01 -->
+      <section class="section" id="s1" data-screen-label="01 Investment Thesis">
+        <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">Investment Thesis</h2></div>
+        <div class="sec-rule"></div>
+
+        <p class="lead"><span class="drop">Zurich Insurance is a quality compounder entering a new phase of growth.</span> Five consecutive years of ROE expansion — from 19.5% to 26.3% — reflects genuine management discipline, not cycle luck. The $10.9B Beazley acquisition and the data center insurance opportunity ($134B TAM by 2030) are catalysts that were not available to the bull case two years ago.</p>
+
+        <div class="keypoints">
+          <div class="kp"><span class="kp-ix">01</span><p><b>Record 2025: $99.1B GWP, $6.8B net income.</b> GWP grew +7.7% — the strongest annual growth in a decade. Operating profit +13% to $8.9B. Core ROE of <b>26.3%</b> is 2.9x the peer median of 9.15%, illustrating a structurally differentiated business model.</p></div>
+          <div class="kp"><span class="kp-ix">02</span><p><b>Beazley acquisition: $10.9B for global specialty leadership.</b> The deal transforms Zurich into the world's leading specialty insurer — London market + US E&amp;S + global specialty — with compelling double-digit ROI synergy targets across underwriting, distribution, and technology.</p></div>
+          <div class="kp"><span class="kp-ix">03</span><p><b>Data center insurance: $134B TAM through 2030.</b> Zurich is an established early-mover in hyperscaler and co-location facility coverage. At 10–15% annual market growth, this TAM expansion alone could add meaningful GWP growth above our base case 3.8% CAGR.</p></div>
+          <div class="kp"><span class="kp-ix">04</span><p><b>Fortress balance sheet enables continued capital returns.</b> SST capital ratio of <b>265%</b> (well above 130% regulatory minimum) supports the 2.0% dividend yield, ongoing buybacks, and flexibility for further bolt-on M&amp;A without dilution risk.</p></div>
+        </div>
+      </section>
+
+      <!-- 02 -->
+      <section class="section" id="s2" data-screen-label="02 Business Model">
+        <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Business Model &amp; Competitive Position</h2></div>
+        <div class="sec-rule"></div>
+
+        <div class="subhead">Three Segments, One Franchise</div>
+        <p class="prose">Zurich operates as a diversified global insurer across three segments. <strong>Property &amp; Casualty Regions</strong> ($51B GWP, ~51% of total) is the largest contributor, delivering a best-in-class <strong>92.6% combined ratio</strong> through disciplined specialty and commercial underwriting. <strong>Farmers</strong> ($29.6B GWP, ~30%) is the highest-margin segment, generating $2.4B in business operating profit in 2025 — a record — supported by 14,000+ agents and a digital-first platform. <strong>Life Regions</strong> ($18.5B GWP, ~19%) provides recurring fee and protection revenue at $2.3B BOP with strong margin stability.</p>
+
+        <figure class="figure">
+          <figcaption class="fig-cap"><span class="ttl">GWP by Segment</span><span class="ex">FY2025 · $B</span></figcaption>
+          <div class="fig-body"><div data-chart="segments"></div></div>
+          <div class="fig-note"><b>Source:</b> Zurich Insurance Group FY2025 results, Helvetia Research. Farmers includes management fees and quota share reinsurance contributions.</div>
+        </figure>
+
+        <div class="subhead">Competitive Advantages</div>
+        <p class="prose">Zurich's moat rests on four pillars: (1) <strong>scale</strong> — 82+ million customers across 200+ countries creates diversification unavailable to smaller peers; (2) <strong>underwriting discipline</strong> — the 92.6% P&amp;C combined ratio is among the best in the global peer group; (3) <strong>technology lead</strong> — 70%+ digital customer interactions vs. 55% industry average reduces cost ratios and improves retention; and (4) <strong>management continuity</strong> — CEO Mario Greco's 10-year tenure has presided over 700 bps of ROE expansion.</p>
+
+        <div class="subhead">Peer ROE Comparison</div>
+        <p class="prose">Zurich's <strong>26.3% core ROE</strong> stands at a 2.9x premium to the peer median of 9.15%. While large peers such as Allianz and AXA deliver above-median ROEs in the 14–16% range, Zurich's combination of specialty underwriting quality, Farmers margin, and capital efficiency keeps it in a category of one among global multi-line insurers.</p>
+
+        <figure class="figure">
+          <figcaption class="fig-cap"><span class="ttl">Core ROE vs. Peers</span><span class="ex">% · approximate estimates</span></figcaption>
+          <div class="fig-body"><div data-chart="peer_roe"></div></div>
+          <div class="fig-note"><b>Note:</b> Zurich per company data; peer figures are approximate estimates. Peer median 9.15% per initiation source document.</div>
+        </figure>
+      </section>
+
+      <!-- 03 -->
+      <section class="section" id="s3" data-screen-label="03 Financial Performance">
+        <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">Financial Performance &amp; Outlook</h2></div>
+        <div class="sec-rule"></div>
+
+        <div class="subhead">Five-Year Track Record of Consistent Compounding</div>
+        <p class="prose">From 2021 to 2025, Zurich grew GWP from <span class="hl">$80.7B</span> to <strong>$99.1B</strong> (+4.8% CAGR), while expanding operating margins from 5.9% to 7.1% and growing core ROE from 19.5% to 26.3%. Net income grew 62% over the five-year period to a record $6.8B in 2025 — a compounding rate that very few global financial institutions can match.</p>
+
+        <div class="fig-grid">
+          <figure class="figure" style="margin:0">
+            <figcaption class="fig-cap"><span class="ttl">GWP Trend</span><span class="ex">$B · 2021A–2028E</span></figcaption>
+            <div class="fig-body"><div data-chart="gwp_trend"></div></div>
+          </figure>
+          <figure class="figure" style="margin:0">
+            <figcaption class="fig-cap"><span class="ttl">GWP Growth Rate</span><span class="ex">% YoY · 2021A–2028E</span></figcaption>
+            <div class="fig-body"><div data-chart="gwp_growth"></div></div>
+          </figure>
+        </div>
+
+        <div class="subhead">Operating Profit and ROE Expansion</div>
+        <p class="prose">The step-change in 2025 operating profit (+13% to $8.9B) reflects the combination of a hardening P&amp;C market, Farmers record performance, and continued Life margin improvement. Looking forward, we project operating profit of <strong>$8.0B in 2026E</strong> (slight moderation from 2025's exceptional year) before resuming expansion to $9.5B by 2030E. Core ROE stabilizes around 26.8–27.4% through the projection period.</p>
+
+        <div class="fig-grid">
+          <figure class="figure" style="margin:0">
+            <figcaption class="fig-cap"><span class="ttl">Operating Profit</span><span class="ex">$B · 2021A–2026E</span></figcaption>
+            <div class="fig-body"><div data-chart="op_profit"></div></div>
+          </figure>
+          <figure class="figure" style="margin:0">
+            <figcaption class="fig-cap"><span class="ttl">Core ROE Trend</span><span class="ex">% · 2021A–2027E</span></figcaption>
+            <div class="fig-body"><div data-chart="core_roe"></div></div>
+          </figure>
+        </div>
+
+        <div class="subhead">2026–2030E Projections</div>
+        <p class="prose">Base-case projections assume GWP growth of 1.8–4.1% annually, reflecting Zurich's mix of mature P&amp;C markets and higher-growth specialty/data center segments. Operating margins expand modestly from 7.3% (2026E) to 7.7% (2030E) as Beazley synergies are captured and AI-driven efficiency gains flow through. EPS grows from $48.0 (2026E) to $55.5 (2030E), a 3.7% CAGR.</p>
+
+        <div class="fig-grid">
+          <figure class="figure" style="margin:0">
+            <figcaption class="fig-cap"><span class="ttl">Operating Margin Trend</span><span class="ex">% · 2021A–2028E</span></figcaption>
+            <div class="fig-body"><div data-chart="op_margin"></div></div>
+            <div class="fig-note">Sustained margin expansion reflects underwriting discipline and AI-driven cost efficiency.</div>
+          </figure>
+          <figure class="figure" style="margin:0">
+            <figcaption class="fig-cap"><span class="ttl">EPS Outlook</span><span class="ex">$ · 2026E–2030E</span></figcaption>
+            <div class="fig-body"><div data-chart="eps_trend"></div></div>
+            <div class="fig-note">EPS grows at 3.7% CAGR 2026–2030E; supported by buybacks and operating leverage.</div>
+          </figure>
+        </div>
+
+        <table class="tbl">
+          <caption>Financial Projections — Base Case 2026E–2030E</caption>
+          <thead><tr><th>Year</th><th>GWP ($B)</th><th>Growth %</th><th>Op. Margin</th><th>EPS ($)</th><th>Core ROE</th></tr></thead>
+          <tbody>
+            <tr><td><b>2025A</b></td><td>$99.1</td><td class="pos">7.7%</td><td>7.1%</td><td>—</td><td>26.3%</td></tr>
+            <tr><td><b>2026E</b></td><td>$103.2</td><td>4.1%</td><td>7.3%</td><td>$48.00</td><td>26.8%</td></tr>
+            <tr><td><b>2027E</b></td><td>$107.2</td><td>3.9%</td><td>7.5%</td><td>$50.50</td><td>27.2%</td></tr>
+            <tr><td><b>2028E</b></td><td>$110.4</td><td>3.0%</td><td>7.6%</td><td>$52.80</td><td>27.4%</td></tr>
+            <tr><td><b>2029E</b></td><td>$112.8</td><td>2.2%</td><td>7.6%</td><td>$54.20</td><td>27.3%</td></tr>
+            <tr><td><b>2030E</b></td><td>$114.8</td><td>1.8%</td><td>7.7%</td><td>$55.50</td><td>27.1%</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 04 -->
+      <section class="section" id="s4" data-screen-label="04 Investment Analysis">
+        <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">Investment Analysis</h2></div>
+        <div class="sec-rule"></div>
+
+        <div class="scenarios">
+          <div class="scn bull">
+            <div class="scn-k">Bull Case (20%)</div>
+            <div class="scn-px">$720</div>
+            <div class="scn-name">Beazley + Data Center</div>
+            <p>Beazley synergies exceed targets; data center insurance grows 15–20% CAGR. GWP CAGR of 7.5% to $149B by 2030E. AI delivers 100+ bps margin expansion. 18.0x P/E on elevated EPS implies $720 in 12 months, $1,233 by 2030.</p>
+            <div class="scn-up">12M Upside&nbsp; <b class="num">+35.8%</b></div>
+          </div>
+          <div class="scn base">
+            <div class="scn-k">Our Target (OW)</div>
+            <div class="scn-px">$680</div>
+            <div class="scn-name">Re-rating on Quality</div>
+            <p>14.2x P/E on 2026E EPS of $48, a modest expansion from current 13.8x as Beazley integration milestones are validated. GWP CAGR 3.8%, operating margins 7.7%, ROE stable at 26–27%. Fair value consensus supports floor at $540.</p>
+            <div class="scn-up">Target&nbsp; <b class="num">$680 (+28.3%)</b></div>
+          </div>
+          <div class="scn bear">
+            <div class="scn-k">Bear Case (25%)</div>
+            <div class="scn-px">$380</div>
+            <div class="scn-name">Integration + Macro</div>
+            <p>Macro recession drives 30–50% profit decline; Beazley integration misses synergy targets by 30%; underwriting cycle deteriorates (+300 bps combined ratio); multiple compresses to 12.0x peer-level. Bear case: $380, or −28% from current.</p>
+            <div class="scn-up">Risk&nbsp; <b class="num">−28.3%</b></div>
+          </div>
+        </div>
+
+        <figure class="figure ladder" style="margin-top:26px">
+          <figcaption class="fig-cap"><span class="ttl">Price Target and Valuation Range</span><span class="ex">$</span></figcaption>
+          <div class="fig-body"><div data-chart="targetladder"></div></div>
+          <div class="fig-note"><b>How to read:</b> Our $680 Overweight target (+28.3% vs. current $530). Bear floor $380; bull case $720. Blended intrinsic fair value: $540.</div>
+        </figure>
+
+        <div class="subhead">Valuation — Modest Premium for Outstanding Quality</div>
+        <p class="prose">Our DCF (7.8% WACC, 2.5% terminal growth) yields a fair value of <strong>$520</strong>. Applying trading comps (12.0x P/E with a justified 25% integration discount) yields <strong>$565</strong>. Insurance M&amp;A precedents (9.3x EV/EBITDA average) set a floor of <strong>$480</strong>. The blended fair value of $540 is broadly in line with current market price — validating that Zurich is not cheap on a static basis. Our Overweight reflects the view that the Beazley synergy trajectory and data center TAM represent unpriced optionality worth 14.2x forward earnings, implying our $680 target.</p>
+
+        <div class="fig-grid">
+          <figure class="figure" style="margin:0">
+            <figcaption class="fig-cap"><span class="ttl">Valuation by Methodology</span><span class="ex">$ per share</span></figcaption>
+            <div class="fig-body"><div data-chart="valuation_methods"></div></div>
+          </figure>
+          <figure class="figure" style="margin:0">
+            <figcaption class="fig-cap"><span class="ttl">Price Scenario Summary</span><span class="ex">$ · 12-month targets</span></figcaption>
+            <div class="fig-body"><div data-chart="scenarios"></div></div>
+          </figure>
+        </div>
+
+        <div class="subhead">Key Risks and Catalysts</div>
+        <p class="prose">The primary downside risk is a macroeconomic recession scenario, which could reduce insurance demand and trigger underwriting losses simultaneously. Beazley integration execution is the second key risk — at $10.9B, any synergy shortfall would be reflected in multiple compression. On the upside, data center insurance acceleration and AI-driven margin improvement are the key levers that could take the stock toward our bull case target of $720.</p>
+
+        <figure class="figure">
+          <figcaption class="fig-cap"><span class="ttl">Headwinds vs. Catalysts</span><span class="ex">Estimated stock price impact · %</span></figcaption>
+          <div class="fig-body"><div data-chart="headwinds"></div></div>
+          <div class="fig-note"><b>Source:</b> Helvetia Research estimates. Values represent rough estimates of potential stock price impact from each identified factor over a 12-month horizon.</div>
+        </figure>
+      </section>
+
+      <!-- 05 -->
+      <section class="section" id="s5" data-screen-label="05 Conclusion">
+        <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">Conclusion</h2></div>
+        <div class="sec-rule"></div>
+
+        <p class="bigquote">A 150-year-old institution entering its most ambitious growth phase.</p>
+
+        <p class="prose" style="margin-top:18px">Zurich Insurance is rarely cheap — and it shouldn't be. The combination of best-in-class ROE (26.3% vs. 9.15% peer median), fortress capital (265% SST), and record 2025 earnings creates a foundation that is genuinely rare in global insurance. The market currently prices Zurich at fair value. We believe this misses two non-consensus elements: the pace of Beazley synergy capture, and the scale of the data center insurance opportunity.</p>
+
+        <div class="callout">
+          <p>We initiate at <strong>Overweight</strong> with a price target of <strong>$680</strong> (+28.3% upside), implying 14.2x 2026E EPS — a modest 3% re-rating from current levels justified by Beazley execution milestones. The 2.0% dividend yield provides compensation while the thesis develops. <strong>Recommended entry: build on weakness toward $480–500</strong> (blended fair value range), where the risk/reward becomes compelling even in base case assumptions. Primary catalyst: Q2 2026 earnings — a beat would validate the organic growth trajectory and de-risk the Beazley integration.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="goldrule thin"></div>
+  <footer class="colophon">
+    <div class="row">
+      <div class="brand">
+        <svg class="mark" viewBox="0 0 34 34" aria-hidden="true">
+          <rect class="acc" x="0" y="0" width="34" height="34"/>
+          <rect class="cut" x="14.5" y="6" width="5" height="22"/>
+          <rect class="cut" x="6" y="14.5" width="22" height="5"/>
+        </svg>
+        <span class="wm" style="line-height:1.1"><b style="color:var(--c-ink);font-family:var(--font-display);font-weight:600;letter-spacing:.14em;font-size:15px">HELVETIA RESEARCH</b><span style="font-family:var(--font-mono);font-size:9px;letter-spacing:.28em;color:var(--c-accent-2);text-transform:uppercase;margin-top:3px">Equity Research · Geneva</span></span>
+      </div>
+      <div style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:.12em;color:var(--c-faint);text-transform:uppercase;text-align:right">
+        Zurich Insurance Group AG · ZURN | SIX<br>June 5, 2026 · Overweight · Target $680
+      </div>
+    </div>
+    <p class="disclaimer"><b>Disclaimer.</b> This document is produced by Helvetia Research for informational purposes only and does not constitute an offer or solicitation to buy or sell any financial instrument. Opinions and estimates reflect our judgment as of the publication date and are subject to change without notice. Past performance is not indicative of future results. Charts and figures are based on company releases and Helvetia Research internal estimates; they may contain inaccuracies. This demonstration note does not constitute investment advice. Investors should conduct their own analysis and, where appropriate, consult a licensed advisor. © 2026 Helvetia Research. All rights reserved.</p>
+  </footer>
+
+</article>
+</div>
+
+<div id="tweaks-root"></div>
+
+<script>
+(function(){
+"use strict";
+const VW=760;
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function svgWrap(h,inner){return`<svg class="svgchart" viewBox="0 0 ${VW} ${h}" preserveAspectRatio="xMidYMid meet" role="img">${inner}</svg>`}
+function niceTicks(min,max,count){const span=max-min,raw=span/count,mag=Math.pow(10,Math.floor(Math.log10(raw))),norm=raw/mag;let step;if(norm<1.5)step=1;else if(norm<3)step=2;else if(norm<7)step=5;else step=10;step*=mag;const start=Math.ceil(min/step)*step,ticks=[];for(let v=start;v<=max+1e-9;v+=step)ticks.push(Math.round(v*1e6)/1e6);return ticks}
+function catLines(l){return Array.isArray(l)?l:[l]}
+
+function columnChart(cfg){
+  const data=cfg.data,n=data.length,maxLines=Math.max(...data.map(d=>catLines(d.label).length));
+  const padT=40,padR=18,padL=cfg.padL!=null?cfg.padL:46,padB=16+maxLines*15;
+  const H=cfg.height||330,x0=padL,x1=VW-padR,y0=H-padB,yTop=padT;
+  const yMin=cfg.yMin!=null?cfg.yMin:0,yMax=cfg.yMax;
+  const ySc=v=>y0-(v-yMin)/(yMax-yMin)*(y0-yTop),zeroY=ySc(Math.max(0,yMin));
+  const fmt=cfg.fmt||(v=>v),slot=(x1-x0)/n,bw=Math.min(cfg.barWidth||64,slot*0.56);
+  let s="";
+  const ticks=cfg.ticks||niceTicks(yMin,yMax,4);
+  ticks.forEach(t=>{const y=ySc(t);s+=`<line class="gl" x1="${x0}" y1="${y.toFixed(1)}" x2="${x1}" y2="${y.toFixed(1)}"/>`;s+=`<text class="glabel" x="${(x0-9)}" y="${(y+3.5).toFixed(1)}" text-anchor="end" font-size="11">${esc(cfg.yfmt?cfg.yfmt(t):t)}</text>`});
+  s+=`<line class="baseline" x1="${x0}" y1="${zeroY.toFixed(1)}" x2="${x1}" y2="${zeroY.toFixed(1)}" stroke-width="1.4"/>`;
+  data.forEach((d,i)=>{
+    const cx=x0+slot*(i+0.5),x=cx-bw/2,vy=ySc(d.value),top=Math.min(vy,zeroY),h=Math.abs(vy-zeroY),cls=d.cls||(cfg.allHi?"hi":"bar");
+    s+=`<rect class="bar ${cls}" x="${x.toFixed(1)}" y="${top.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(1,h).toFixed(1)}"/>`;
+    const lblY=d.value>=0?top-11:top+h+19;
+    s+=`<text class="val" x="${cx.toFixed(1)}" y="${lblY.toFixed(1)}" text-anchor="middle" font-size="15" font-weight="700">${esc(fmt(d.value))}</text>`;
+    catLines(d.label).forEach((ln,li)=>{s+=`<text class="cat" x="${cx.toFixed(1)}" y="${(y0+18+li*15).toFixed(1)}" text-anchor="middle" font-size="11.5">${esc(ln)}</text>`});
+  });
+  if(cfg.refLine){const y=ySc(cfg.refLine.value);s+=`<line class="refline" x1="${x0}" y1="${y.toFixed(1)}" x2="${x1}" y2="${y.toFixed(1)}"/>`;if(cfg.refLine.label)s+=`<text x="${x0+4}" y="${(y-8).toFixed(1)}" text-anchor="start" font-size="10.5" class="glabel" letter-spacing=".1em" style="fill:var(--c-accent-2)">${esc(cfg.refLine.label)}</text>`}
+  return svgWrap(H,s);
+}
+
+function barRows(cfg){
+  const data=cfg.data,n=data.length,rowH=cfg.rowH||34,gap=12;
+  const padT=8,padB=8,padL=cfg.padL||130,padR=70;
+  const H=padT+padB+n*rowH+(n-1)*gap,x0=padL,x1=VW-padR;
+  const max=cfg.max||Math.max(...data.map(d=>d.value));
+  const xSc=v=>x0+(v/max)*(x1-x0),fmt=cfg.fmt||(v=>v);
+  let s="";
+  data.forEach((d,i)=>{const y=padT+i*(rowH+gap),w=xSc(d.value)-x0;s+=`<rect class="bar ${d.cls||'bar'}" x="${x0}" y="${y}" width="${Math.max(2,w).toFixed(1)}" height="${rowH}"/>`;s+=`<text class="cat" x="${(x0-14)}" y="${(y+rowH/2+4).toFixed(1)}" text-anchor="end" font-size="12.5">${esc(d.label)}</text>`;s+=`<text class="val" x="${(x0+w+12).toFixed(1)}" y="${(y+rowH/2+4.5).toFixed(1)}" font-size="13.5" font-weight="700">${esc(fmt(d.value))}</text>`});
+  return svgWrap(H,s);
+}
+
+function lineArea(cfg){
+  const pts=cfg.data,n=pts.length,padT=40,padR=24,padL=46,padB=44,H=cfg.height||320;
+  const x0=padL,x1=VW-padR,y0=H-padB,yTop=padT,yMin=cfg.yMin,yMax=cfg.yMax;
+  const ySc=v=>y0-(v-yMin)/(yMax-yMin)*(y0-yTop),xSc=i=>x0+(i/(n-1))*(x1-x0);
+  const fmt=cfg.fmt||(v=>v);
+  let s="";
+  const ticks=cfg.ticks||niceTicks(yMin,yMax,4);
+  ticks.forEach(t=>{const y=ySc(t);s+=`<line class="gl" x1="${x0}" y1="${y.toFixed(1)}" x2="${x1}" y2="${y.toFixed(1)}"/>`;s+=`<text class="glabel" x="${(x0-9)}" y="${(y+3.5).toFixed(1)}" text-anchor="end" font-size="11">${esc(cfg.yfmt?cfg.yfmt(t):t)}</text>`});
+  let line="",area=`M ${x0} ${y0} `;
+  pts.forEach((p,i)=>{const x=xSc(i),y=ySc(p.value);line+=(i===0?"M":"L")+` ${x.toFixed(1)} ${y.toFixed(1)} `;area+=`L ${x.toFixed(1)} ${y.toFixed(1)} `});
+  area+=`L ${x1} ${y0} Z`;
+  s+=`<path class="area" d="${area}"/>`;s+=`<path class="line" d="${line}"/>`;
+  pts.forEach((p,i)=>{const x=xSc(i),y=ySc(p.value);s+=`<circle class="dot" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.5"/>`;s+=`<text class="val" x="${x.toFixed(1)}" y="${(y-14).toFixed(1)}" text-anchor="middle" font-size="14.5" font-weight="700">${esc(fmt(p.value))}</text>`;catLines(p.label).forEach((ln,li)=>{s+=`<text class="cat" x="${x.toFixed(1)}" y="${(y0+18+li*15).toFixed(1)}" text-anchor="middle" font-size="11.5">${esc(ln)}</text>`})});
+  return svgWrap(H,s);
+}
+
+function ladder(cfg){
+  const H=150,padL=22,padR=22,top=64,x0=padL,x1=VW-padR,lo=cfg.min,hi=cfg.max;
+  const xSc=v=>x0+(v-lo)/(hi-lo)*(x1-x0);
+  let s="";
+  (cfg.zones||[]).forEach(z=>{const a=xSc(z.from),b=xSc(z.to);s+=`<rect class="bar ${z.cls}" x="${a.toFixed(1)}" y="${top-7}" width="${(b-a).toFixed(1)}" height="14" opacity="0.18"/>`;s+=`<text class="cat" x="${((a+b)/2).toFixed(1)}" y="${top-16}" text-anchor="middle" font-size="11" letter-spacing=".06em">${esc(z.label)}</text>`});
+  s+=`<line class="baseline" x1="${x0}" y1="${top}" x2="${x1}" y2="${top}" stroke-width="2"/>`;
+  (cfg.axisTicks||[]).forEach(t=>{const x=xSc(t);s+=`<line class="gl" x1="${x.toFixed(1)}" y1="${top}" x2="${x.toFixed(1)}" y2="${top+6}"/>`;s+=`<text class="glabel" x="${x.toFixed(1)}" y="${top+20}" text-anchor="middle" font-size="10.5">${esc(t)}</text>`});
+  (cfg.markers||[]).forEach(m=>{const x=xSc(m.value),up=m.up!==false,ty=up?top-30:top+38;s+=`<line x1="${x.toFixed(1)}" y1="${top}" x2="${x.toFixed(1)}" y2="${(up?top-22:top+22).toFixed(1)}" stroke="var(--c-${m.color||'ink'})" stroke-width="2"/>`;s+=`<circle cx="${x.toFixed(1)}" cy="${top}" r="5.5" fill="var(--c-${m.color||'ink'})"/>`;s+=`<text x="${x.toFixed(1)}" y="${ty.toFixed(1)}" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--c-${m.color||'ink'})" font-family="var(--font-display)">${esc(m.label)}</text>`;s+=`<text x="${x.toFixed(1)}" y="${(up?ty-15:ty+15).toFixed(1)}" text-anchor="middle" font-size="9" class="glabel" letter-spacing=".14em">${esc(m.k)}</text>`});
+  return svgWrap(H,s);
+}
+
+const pct1=v=>(v>0?"+":"")+v.toFixed(1)+"%";
+const pct1np=v=>v.toFixed(1)+"%";
+
+const CHARTS={
+  segments:()=>barRows({
+    max:56,padL:155,fmt:v=>"$"+v.toFixed(1)+"B",
+    data:[
+      {label:"P&C Regions",value:51.0,cls:"hi"},
+      {label:"Farmers",value:29.6,cls:"bar"},
+      {label:"Life Regions",value:18.5,cls:"bar"}
+    ]
+  }),
+  peer_roe:()=>barRows({
+    max:30,padL:180,fmt:v=>v.toFixed(1)+"%",
+    data:[
+      {label:"Zurich (ZURN)",value:26.3,cls:"hi"},
+      {label:"Allianz",value:15.2,cls:"bar"},
+      {label:"AXA",value:14.8,cls:"bar"},
+      {label:"Industry Average",value:11.5,cls:"bar2"},
+      {label:"Peer Median",value:9.15,cls:"bar2"}
+    ]
+  }),
+  gwp_trend:()=>columnChart({
+    height:340,yMin:75,yMax:120,
+    ticks:[80,90,100,110,120],
+    padL:50,yfmt:v=>"$"+v.toFixed(0),
+    fmt:v=>"$"+v.toFixed(1)+"B",
+    data:[
+      {label:"2021A",value:80.7,cls:"bar"},
+      {label:"2022A",value:84.5,cls:"bar"},
+      {label:"2023A",value:88.0,cls:"bar"},
+      {label:"2024A",value:92.0,cls:"bar"},
+      {label:"2025A",value:99.1,cls:"hi"},
+      {label:"2026E",value:103.2,cls:"pos"},
+      {label:"2027E",value:107.2,cls:"bar"},
+      {label:"2028E",value:110.4,cls:"bar"}
+    ]
+  }),
+  gwp_growth:()=>columnChart({
+    height:320,yMin:0,yMax:10,
+    ticks:[0,2,4,6,8,10],yfmt:v=>v+"%",fmt:pct1np,
+    data:[
+      {label:"2021A",value:4.2,cls:"bar"},
+      {label:"2022A",value:4.7,cls:"bar"},
+      {label:"2023A",value:4.1,cls:"bar"},
+      {label:"2024A",value:4.5,cls:"bar"},
+      {label:"2025A",value:7.7,cls:"hi"},
+      {label:"2026E",value:4.1,cls:"pos"},
+      {label:"2027E",value:3.9,cls:"bar"},
+      {label:"2028E",value:3.0,cls:"bar"}
+    ]
+  }),
+  op_profit:()=>columnChart({
+    height:320,yMin:4.5,yMax:9.5,
+    ticks:[5,6,7,8,9],
+    padL:50,yfmt:v=>"$"+v.toFixed(0),
+    fmt:v=>"$"+v.toFixed(1)+"B",barWidth:90,
+    data:[
+      {label:"2021A",value:5.0,cls:"bar"},
+      {label:"2022A",value:5.5,cls:"bar"},
+      {label:"2023A",value:5.8,cls:"bar"},
+      {label:"2024A",value:6.6,cls:"bar"},
+      {label:"2025A",value:8.9,cls:"hi"},
+      {label:"2026E",value:8.0,cls:"pos"}
+    ]
+  }),
+  core_roe:()=>columnChart({
+    height:320,yMin:16,yMax:29,
+    ticks:[18,20,22,24,26,28],
+    yfmt:v=>v+"%",fmt:v=>v.toFixed(1)+"%",
+    data:[
+      {label:"2021A",value:19.5,cls:"bar"},
+      {label:"2022A",value:21.2,cls:"bar"},
+      {label:"2023A",value:23.0,cls:"bar"},
+      {label:"2024A",value:24.6,cls:"bar"},
+      {label:"2025A",value:26.3,cls:"hi"},
+      {label:"2026E",value:26.8,cls:"pos"},
+      {label:"2027E",value:27.2,cls:"bar"}
+    ]
+  }),
+  op_margin:()=>lineArea({
+    height:300,yMin:5,yMax:8.5,
+    ticks:[5,6,7,8],yfmt:v=>v.toFixed(0)+"%",
+    fmt:v=>v.toFixed(1)+"%",
+    data:[
+      {label:"2021A",value:5.9},{label:"2022A",value:6.2},
+      {label:"2023A",value:6.2},{label:"2024A",value:6.7},
+      {label:"2025A",value:7.1},{label:"2026E",value:7.3},
+      {label:"2027E",value:7.5},{label:"2028E",value:7.6}
+    ]
+  }),
+  eps_trend:()=>columnChart({
+    height:300,yMin:44,yMax:58,
+    ticks:[44,48,52,56],
+    padL:56,yfmt:v=>"$"+v.toFixed(0),
+    fmt:v=>"$"+v.toFixed(1),barWidth:100,
+    data:[
+      {label:"2026E",value:48.0,cls:"hi"},
+      {label:"2027E",value:50.5,cls:"pos"},
+      {label:"2028E",value:52.8,cls:"bar"},
+      {label:"2029E",value:54.2,cls:"bar"},
+      {label:"2030E",value:55.5,cls:"bar"}
+    ]
+  }),
+  targetladder:()=>ladder({
+    min:300,max:780,
+    axisTicks:[380,450,530,600,680,720],
+    zones:[
+      {from:360,to:400,cls:"neg",label:"Bear Case"},
+      {from:700,to:740,cls:"pos",label:"Bull Case"}
+    ],
+    markers:[
+      {value:530,label:"$530",k:"CURRENT PRICE",color:"ink",up:false},
+      {value:680,label:"$680",k:"TARGET · OVERWEIGHT",color:"accent",up:true}
+    ]
+  }),
+  valuation_methods:()=>barRows({
+    max:760,padL:195,fmt:v=>"$"+v.toFixed(0),
+    data:[
+      {label:"Our Target (OW)",value:680,cls:"hi"},
+      {label:"Bull Case (12M)",value:720,cls:"pos"},
+      {label:"Trading Comps",value:565,cls:"bar"},
+      {label:"Blended Fair Value",value:540,cls:"bar2"},
+      {label:"DCF Fair Value",value:520,cls:"bar"},
+      {label:"M&A Floor",value:480,cls:"bar"}
+    ]
+  }),
+  scenarios:()=>columnChart({
+    height:320,yMin:340,yMax:760,
+    ticks:[380,450,530,600,680,720],
+    padL:56,yfmt:v=>"$"+v.toFixed(0),
+    fmt:v=>"$"+v.toFixed(0),barWidth:110,
+    data:[
+      {label:"Bear Case",value:380,cls:"neg"},
+      {label:["Base / Consensus","12M Target"],value:545,cls:"bar2"},
+      {label:"Our Target",value:680,cls:"hi"},
+      {label:"Bull Case",value:720,cls:"pos"}
+    ]
+  }),
+  headwinds:()=>columnChart({
+    height:360,yMin:-24,yMax:18,
+    ticks:[-20,-15,-10,-5,0,5,10,15],
+    yfmt:v=>v.toFixed(0),fmt:pct1,
+    data:[
+      {label:["Macro","Recession"],value:-20,cls:"neg"},
+      {label:["Beazley","Integration"],value:-10,cls:"neg"},
+      {label:["Underwriting","Cycle"],value:-8,cls:"neg"},
+      {label:["Beazley","Synergies"],value:15,cls:"pos"},
+      {label:["Data Center","TAM"],value:10,cls:"pos"},
+      {label:["AI Margin","Benefit"],value:6,cls:"pos"}
+    ]
+  })
+};
+
+function renderAll(){document.querySelectorAll("[data-chart]").forEach(el=>{const id=el.getAttribute("data-chart");if(CHARTS[id])el.innerHTML=CHARTS[id]()})}
+window.ZurnCharts={renderAll,CHARTS};
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",renderAll);
+else renderAll();
+})();
+</script>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel">
+const __TWEAKS_STYLE=`.twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;max-height:calc(100vh - 32px);display:flex;flex-direction:column;transform:scale(var(--dc-inv-zoom,1));transform-origin:bottom right;background:rgba(250,249,247,.78);color:#29261b;-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);border:.5px solid rgba(255,255,255,.6);border-radius:14px;box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 40px rgba(0,0,0,.18);font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}.twk-hd{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;cursor:move;user-select:none}.twk-hd b{font-size:12px;font-weight:600}.twk-x{appearance:none;border:0;background:transparent;color:rgba(41,38,27,.55);width:22px;height:22px;border-radius:6px;cursor:default;font-size:13px;line-height:1}.twk-x:hover{background:rgba(0,0,0,.06)}.twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;min-height:0}.twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(41,38,27,.45);padding:10px 0 0}.twk-sect:first-child{padding-top:0}.twk-seg{position:relative;display:flex;padding:2px;border-radius:8px;background:rgba(0,0,0,.06);user-select:none}.twk-seg-thumb{position:absolute;top:2px;bottom:2px;border-radius:6px;background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(0,0,0,.12);transition:left .15s cubic-bezier(.3,.7,.4,1),width .15s}.twk-seg button{appearance:none;position:relative;z-index:1;flex:1;border:0;background:transparent;color:inherit;font:inherit;font-weight:500;min-height:22px;border-radius:6px;cursor:default;padding:4px 6px;line-height:1.2}.twk-row{display:flex;flex-direction:column;gap:5px}`;
+function useTweaks(defaults){const[values,setValues]=React.useState(defaults);const setTweak=React.useCallback((k,v)=>{const edits=typeof k==='object'&&k!==null?k:{[k]:v};setValues(p=>({...p,...edits}));window.parent.postMessage({type:'__edit_mode_set_keys',edits},'*')},[]);return[values,setTweak]}
+function TweaksPanel({title='Tweaks',children}){const[open,setOpen]=React.useState(false);const dragRef=React.useRef(null);const offsetRef=React.useRef({x:16,y:16});const clamp=React.useCallback(()=>{const p=dragRef.current;if(!p)return;const w=p.offsetWidth,h=p.offsetHeight,PAD=16;offsetRef.current={x:Math.min(Math.max(PAD,window.innerWidth-w-PAD),Math.max(PAD,offsetRef.current.x)),y:Math.min(Math.max(PAD,window.innerHeight-h-PAD),Math.max(PAD,offsetRef.current.y))};p.style.right=offsetRef.current.x+'px';p.style.bottom=offsetRef.current.y+'px'},[]);React.useEffect(()=>{if(!open)return;clamp();const ro=typeof ResizeObserver!=='undefined'?new ResizeObserver(clamp):null;if(ro){ro.observe(document.documentElement);return()=>ro.disconnect()}window.addEventListener('resize',clamp);return()=>window.removeEventListener('resize',clamp)},[open,clamp]);React.useEffect(()=>{const onMsg=e=>{const t=e?.data?.type;if(t==='__activate_edit_mode')setOpen(true);else if(t==='__deactivate_edit_mode')setOpen(false)};window.addEventListener('message',onMsg);window.parent.postMessage({type:'__edit_mode_available'},'*');return()=>window.removeEventListener('message',onMsg)},[]);if(!open)return null;const onDrag=e=>{const p=dragRef.current;if(!p)return;const r=p.getBoundingClientRect(),sx=e.clientX,sy=e.clientY,sr=window.innerWidth-r.right,sb=window.innerHeight-r.bottom;const move=ev=>{offsetRef.current={x:sr-(ev.clientX-sx),y:sb-(ev.clientY-sy)};clamp()};const up=()=>{window.removeEventListener('mousemove',move);window.removeEventListener('mouseup',up)};window.addEventListener('mousemove',move);window.addEventListener('mouseup',up)};
+return(<><style>{__TWEAKS_STYLE}</style><div ref={dragRef} className="twk-panel" style={{right:offsetRef.current.x,bottom:offsetRef.current.y}}><div className="twk-hd" onMouseDown={onDrag}><b>{title}</b><button className="twk-x" onMouseDown={e=>e.stopPropagation()} onClick={()=>{setOpen(false);window.parent.postMessage({type:'__edit_mode_dismissed'},'*')}}>✕</button></div><div className="twk-body">{children}</div></div></>)}
+function TweakSection({label}){return<div className="twk-sect">{label}</div>}
+function TweakRadio({value,options,onChange}){const ref=React.useRef(null);const[drag,setDrag]=React.useState(false);const vRef=React.useRef(value);vRef.current=value;const opts=options.map(o=>typeof o==='object'?o:{value:o,label:o});const idx=Math.max(0,opts.findIndex(o=>o.value===value));const n=opts.length;const segAt=x=>{const r=ref.current.getBoundingClientRect();return opts[Math.max(0,Math.min(n-1,Math.floor(((x-r.left-2)/(r.width-4))*n)))].value};const onDown=e=>{setDrag(true);const v0=segAt(e.clientX);if(v0!==vRef.current)onChange(v0);const mv=ev=>{if(ref.current){const v=segAt(ev.clientX);if(v!==vRef.current)onChange(v)}};const up=()=>{setDrag(false);window.removeEventListener('pointermove',mv);window.removeEventListener('pointerup',up)};window.addEventListener('pointermove',mv);window.addEventListener('pointerup',up)};
+return(<div className="twk-row"><div ref={ref} role="radiogroup" onPointerDown={onDown} className={drag?'twk-seg dragging':'twk-seg'}><div className="twk-seg-thumb" style={{left:`calc(2px + ${idx} * (100% - 4px) / ${n})`,width:`calc((100% - 4px) / ${n})`}}/>{opts.map(o=><button key={o.value} type="button" role="radio" aria-checked={o.value===value}>{o.label}</button>)}</div></div>)}
+
+const TWEAK_DEFAULTS={"palette":"navy","typography":"serif-display","density":"regular"};
+const PALETTES=[{key:"navy",name:"Navy + Gold",sw:["#0f1c2e","#b8901f","#f5f3ee"]},{key:"forest",name:"Forest Green",sw:["#11302a","#0f766e","#f4f1ea"]},{key:"ink",name:"Ink + Bordeaux",sw:["#1a1a1a","#8b1e2d","#f2efe9"]},{key:"swiss",name:"Clean Swiss",sw:["#13294b","#13294b","#ffffff"]}];
+const TYPO={"Serif Headings":"serif-display","All Sans":"sans","All Serif":"serif"};
+const TYPO_INV={"serif-display":"Serif Headings","sans":"All Sans","serif":"All Serif"};
+const DENS={"Compact":"compact","Standard":"regular","Spacious":"comfy"};
+const DENS_INV={"compact":"Compact","regular":"Standard","comfy":"Spacious"};
+function applyTweaks(t){const r=document.documentElement;r.setAttribute("data-palette",t.palette);r.setAttribute("data-density",t.density);if(t.typography==="serif-display")r.removeAttribute("data-type");else r.setAttribute("data-type",t.typography)}
+function App(){const[t,setTweak]=useTweaks(TWEAK_DEFAULTS);React.useEffect(()=>{applyTweaks(t)},[t]);return(<TweaksPanel title="Visual Settings"><TweakSection label="Palette"/><div style={{display:"grid",gap:7,padding:"2px 0 6px"}}>{PALETTES.map(p=>{const on=t.palette===p.key;return(<button key={p.key} onClick={()=>setTweak("palette",p.key)} style={{display:"flex",alignItems:"center",gap:10,width:"100%",padding:"8px 10px",cursor:"pointer",textAlign:"left",border:on?"1.5px solid var(--tw-fg,#0f1c2e)":"1px solid rgba(0,0,0,.14)",background:on?"rgba(0,0,0,.04)":"transparent",borderRadius:8,font:"inherit"}}><span style={{display:"inline-flex",borderRadius:4,overflow:"hidden",border:"1px solid rgba(0,0,0,.12)"}}>{p.sw.map((c,i)=><span key={i} style={{width:16,height:16,background:c}}/>)}</span><span style={{fontSize:13,fontWeight:on?600:400}}>{p.name}</span></button>)})}</div><TweakSection label="Typography"/><TweakRadio value={TYPO_INV[t.typography]} options={Object.keys(TYPO)} onChange={v=>setTweak("typography",TYPO[v])}/><TweakSection label="Density"/><TweakRadio value={DENS_INV[t.density]} options={Object.keys(DENS)} onChange={v=>setTweak("density",DENS[v])}/></TweaksPanel>)}
+ReactDOM.createRoot(document.getElementById("tweaks-root")).render(<App/>);
+</script>
+
+<script>
+(function(){
+  const links=[...document.querySelectorAll(".toc a")];
+  const map=new Map(links.map(a=>[a.getAttribute("href").slice(1),a]));
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove("active"));const a=map.get(e.target.id);if(a)a.classList.add("active")}})},{rootMargin:"-20% 0px -70% 0px"});
+  document.querySelectorAll(".section").forEach(s=>obs.observe(s));
+  links.forEach(a=>a.addEventListener("click",ev=>{const el=document.getElementById(a.getAttribute("href").slice(1));if(el){ev.preventDefault();window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-12,behavior:"smooth"})}}));
+})();
+</script>
+</body>
+</html>
