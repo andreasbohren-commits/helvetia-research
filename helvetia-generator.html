@@ -73,6 +73,10 @@ body.report-mode #form-wrap{display:none}
 .field input::placeholder{color:#c0bab0}
 .key-hint{font-family:"IBM Plex Mono",monospace;font-size:10px;color:#4a9c6f;margin-top:6px;display:none}
 .key-hint.visible{display:block}
+.lang-row{display:flex;gap:0;margin-bottom:24px}
+.lang-btn{flex:1;height:40px;border:1.5px solid #d8d2c6;background:#fff;color:#5d6b7a;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .12s}
+.lang-btn:first-child{border-right:none}
+.lang-btn.active{background:#0f1c2e;color:#f3efe6;border-color:#0f1c2e;z-index:1}
 .gen-btn{width:100%;height:52px;background:#0f1c2e;color:#f3efe6;border:none;font-family:"Source Serif 4",Georgia,serif;font-size:17px;font-weight:600;letter-spacing:.02em;cursor:pointer;transition:background .15s;display:flex;align-items:center;justify-content:center;gap:10px}
 .gen-btn:hover:not(:disabled){background:#1e2f45}
 .gen-btn:disabled{opacity:.55;cursor:not-allowed}
@@ -277,6 +281,11 @@ body.report-mode #report-wrap{display:block}
         <div class="key-hint" id="key-hint">✓ Key remembered in this browser</div>
       </div>
 
+      <div class="lang-row">
+        <button class="lang-btn active" id="lang-en" onclick="setLang('en')">English</button>
+        <button class="lang-btn" id="lang-fr" onclick="setLang('fr')">Français</button>
+      </div>
+
       <div class="field">
         <label for="query">Company name or ticker symbol</label>
         <input type="text" id="query" placeholder="e.g. Apple, MSFT, Nestlé, 2330.TW" autocomplete="off" spellcheck="false">
@@ -320,6 +329,106 @@ body.report-mode #report-wrap{display:block}
 <!-- ── App script ─────────────────────────────────────────────────────────────── -->
 <script>
 "use strict";
+
+// ── Language ───────────────────────────────────────────────────────────────────
+let currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+  document.getElementById('lang-fr').classList.toggle('active', lang === 'fr');
+}
+
+const I18N = {
+  en: {
+    mhRight:       (country, sector) => `Equity Research &nbsp;·&nbsp; ${X(country)}<br>${X(sector)} &nbsp;·&nbsp; <b>Initiation of Coverage</b>`,
+    eyebrow:       'Equity Research · Initiation of Coverage',
+    metaPublished: 'Published', metaTicker: 'Ticker', metaAnalyst: 'Analyst',
+    analystDesk:   'Equity Research Desk · Helvetia Research',
+    commonEquity:  'Common Equity',
+    recommendation:'Recommendation',
+    ratingScale:   'Rating Scale',
+    ratingNames:   ['Sell','Reduce','Hold','Overweight','Buy'],
+    keyMetrics:    'Key Metrics',
+    contents:      'Contents',
+    toc:           ['Investment Thesis','Competitive Position','Financial Performance','Valuation Analysis','Conclusion'],
+    sec1:          'Investment Thesis',
+    sec2:          'Business Model & Competitive Position',
+    sec3:          'Financial Performance & Outlook',
+    sec4:          'Valuation & Investment Analysis',
+    sec5:          'Conclusion',
+    segmentTitle:  'Revenue by Segment',
+    segSource:     (name) => `<b>Source:</b> ${X(name)} filings, Helvetia Research estimates.`,
+    peerNote:      (ticker) => `<b>Note:</b> ${X(ticker)} highlighted; peer figures are estimates.`,
+    vsPeers:       'vs. Peers',
+    approxEst:     'Approximate estimates',
+    revHistory:    'Revenue History & Forecast',
+    revGrowth:     'Revenue Growth Rate',
+    pctYoY:        '% YoY',
+    marginTrend:   (name) => `${X(name)} Trend`,
+    epsOutlook:    (name) => `${X(name)} Outlook`,
+    financialProj: 'Financial Projections — Base Case',
+    colYear: 'Year', colRevenue: 'Revenue', colGrowth: 'Growth',
+    colGrossMargin: 'Gross Margin', colOpMargin: 'Op. Margin', colEps: 'EPS',
+    bullLabel:     (prob) => `Bull Case (${X(prob)})`,
+    baseLabel:     (prob) => `Our Target${prob ? ` (${X(prob)})` : ''}`,
+    bearLabel:     (prob) => `Bear Case (${X(prob)})`,
+    return12m:     'Return', risk: 'Risk', target: 'Target',
+    priceTarget:   'Price Target and Valuation Range',
+    howToRead:     (cur, tp, rating, upside, cp, bear, bull) =>
+      `<b>How to read:</b> Our ${cur}${Math.floor(tp)} ${X(rating)} target (${X(upside)} vs. current ${cur}${Math.floor(cp)}). Bear: ${cur}${Math.floor(bear)}; Bull: ${cur}${Math.floor(bull)}.`,
+    valMethod:     'Valuation Methodology',
+    scenarioSum:   'Price Scenario Summary',
+    targets12m:    (cur) => `${cur} · 12-month targets`,
+    upsideLabel:   (pct) => pct >= 0 ? 'Upside' : 'Downside',
+    disclaimer:    `<b>Disclaimer.</b> This document is produced by Helvetia Research for informational purposes only and does not constitute an offer or solicitation to buy or sell any financial instrument. Opinions and estimates reflect our judgment as of the publication date and are subject to change without notice. Past performance is not indicative of future results. Charts and figures are based on publicly available information and Helvetia Research internal estimates; they may contain inaccuracies. This demonstration note does not constitute investment advice. Investors should conduct their own analysis and, where appropriate, consult a licensed advisor. © 2026 Helvetia Research. All rights reserved.`,
+    researchSubline: 'Equity Research · Geneva',
+  },
+  fr: {
+    mhRight:       (country, sector) => `Recherche Actions &nbsp;·&nbsp; ${X(country)}<br>${X(sector)} &nbsp;·&nbsp; <b>Initiation de Couverture</b>`,
+    eyebrow:       'Recherche Actions · Initiation de Couverture',
+    metaPublished: 'Publié', metaTicker: 'Ticker', metaAnalyst: 'Analyste',
+    analystDesk:   'Équipe Recherche Actions · Helvetia Research',
+    commonEquity:  'Action ordinaire',
+    recommendation:'Recommandation',
+    ratingScale:   'Échelle de notation',
+    ratingNames:   ['Vendre','Alléger','Conserver','Surpondérer','Acheter'],
+    keyMetrics:    'Indicateurs clés',
+    contents:      'Sommaire',
+    toc:           ['Thèse d\'investissement','Position concurrentielle','Performance financière','Analyse de valorisation','Conclusion'],
+    sec1:          'Thèse d\'investissement',
+    sec2:          'Modèle économique & Position concurrentielle',
+    sec3:          'Performance financière & Perspectives',
+    sec4:          'Valorisation & Analyse d\'investissement',
+    sec5:          'Conclusion',
+    segmentTitle:  'Chiffre d\'affaires par segment',
+    segSource:     (name) => `<b>Source :</b> Documents financiers ${X(name)}, estimations Helvetia Research.`,
+    peerNote:      (ticker) => `<b>Note :</b> ${X(ticker)} mis en évidence ; données des pairs issues d'estimations.`,
+    vsPeers:       'vs. Pairs',
+    approxEst:     'Estimations approximatives',
+    revHistory:    'Historique & Prévisions de CA',
+    revGrowth:     'Croissance du chiffre d\'affaires',
+    pctYoY:        '% a/a',
+    marginTrend:   (name) => `Évolution — ${X(name)}`,
+    epsOutlook:    (name) => `Perspectives — ${X(name)}`,
+    financialProj: 'Projections financières — Scénario de base',
+    colYear: 'Année', colRevenue: 'CA', colGrowth: 'Croissance',
+    colGrossMargin: 'Marge brute', colOpMargin: 'Marge op.', colEps: 'BPA',
+    bullLabel:     (prob) => `Scénario haussier (${X(prob)})`,
+    baseLabel:     (prob) => `Notre objectif${prob ? ` (${X(prob)})` : ''}`,
+    bearLabel:     (prob) => `Scénario baissier (${X(prob)})`,
+    return12m:     'Rendement', risk: 'Risque', target: 'Objectif',
+    priceTarget:   'Objectif de cours et fourchette de valorisation',
+    howToRead:     (cur, tp, rating, upside, cp, bear, bull) =>
+      `<b>Comment lire :</b> Notre objectif ${cur}${Math.floor(tp)} (${X(upside)} par rapport au cours actuel ${cur}${Math.floor(cp)}). Baissier : ${cur}${Math.floor(bear)} ; Haussier : ${cur}${Math.floor(bull)}.`,
+    valMethod:     'Méthodologie de valorisation',
+    scenarioSum:   'Synthèse des scénarios de cours',
+    targets12m:    (cur) => `${cur} · Objectifs à 12 mois`,
+    upsideLabel:   (pct) => pct >= 0 ? 'Potentiel' : 'Risque baissier',
+    disclaimer:    `<b>Avertissement.</b> Ce document est produit par Helvetia Research à titre informatif uniquement et ne constitue pas une offre ou une sollicitation d'achat ou de vente d'un instrument financier. Les opinions et estimations reflètent notre jugement à la date de publication et sont susceptibles d'être modifiées sans préavis. Les performances passées ne préjugent pas des performances futures. Les graphiques et chiffres sont basés sur des informations publiques et des estimations internes de Helvetia Research ; ils peuvent contenir des inexactitudes. Cette note de démonstration ne constitue pas un conseil en investissement. Les investisseurs doivent mener leur propre analyse et, le cas échéant, consulter un conseiller agréé. © 2026 Helvetia Research. Tous droits réservés.`,
+    researchSubline: 'Recherche Actions · Genève',
+  }
+};
 
 // ── Chart globals ──────────────────────────────────────────────────────────────
 let CURRENCY = '$';
@@ -536,14 +645,15 @@ function buildChartsConfig(data) {
 }
 
 // ── Report HTML builder ────────────────────────────────────────────────────────
-function buildReportContent(data) {
+function buildReportContent(data, lang) {
+  const t = I18N[lang] || I18N.en;
   const c = data.company, cur = data.currency_symbol, scn = data.scenarios, ch = data.charts;
 
   const scaleTrack = Array.from({length:5}, (_,i) =>
     `<div class="scale-seg${i===data.rating_index?' active':''}"></div>`
   ).join('');
 
-  const scaleNames = ['Sell','Reduce','Hold','Overweight','Buy'].map((name,i) =>
+  const scaleNames = t.ratingNames.map((name,i) =>
     `<span${i===data.rating_index?' class="on"':''}>${name}</span>`
   ).join('');
 
@@ -584,22 +694,19 @@ function buildReportContent(data) {
       </svg>
       <span class="wm"><b>HELVETIA</b><span>Research · Geneva</span></span>
     </div>
-    <div class="mh-right">
-      Equity Research &nbsp;·&nbsp; ${X(c.country)}<br>
-      ${X(c.sector)} &nbsp;·&nbsp; <b>Initiation of Coverage</b>
-    </div>
+    <div class="mh-right">${t.mhRight(c.country, c.sector)}</div>
   </header>
   <div class="goldrule"></div>
 
   <div class="pad titleblock">
-    <div class="eyebrow">Equity Research · Initiation of Coverage</div>
+    <div class="eyebrow">${t.eyebrow}</div>
     <h1 class="doc-title">${X(data.doc_title)}</h1>
     <p class="doc-sub">${X(data.doc_subtitle)}</p>
     <div class="doc-meta">
       <span><b>${X(c.name)}</b></span>
-      <span>Ticker&nbsp; <b>${X(c.ticker)}</b></span>
-      <span>Published&nbsp; <b>${X(data.report_date)}</b></span>
-      <span>Analyst&nbsp; <b>Equity Research Desk · Helvetia Research</b></span>
+      <span>${t.metaTicker}&nbsp; <b>${X(c.ticker)}</b></span>
+      <span>${t.metaPublished}&nbsp; <b>${X(data.report_date)}</b></span>
+      <span>${t.metaAnalyst}&nbsp; <b>${t.analystDesk}</b></span>
     </div>
   </div>
 
@@ -609,10 +716,10 @@ function buildReportContent(data) {
         <span class="name">${X(c.name)}</span>
         <span class="tick">${X(c.ticker)}</span>
       </div>
-      <div class="ts-sector">${X(c.exchange)} · ${X(c.sector)} · Common Equity</div>
+      <div class="ts-sector">${X(c.exchange)} · ${X(c.sector)} · ${t.commonEquity}</div>
       <div class="call">
         <div class="rating-badge">
-          <span class="lbl">Recommendation</span>
+          <span class="lbl">${t.recommendation}</span>
           <span class="val">${X(data.rating)}</span>
         </div>
         <div class="figs">
@@ -631,57 +738,53 @@ function buildReportContent(data) {
         </div>
       </div>
       <div class="recscale" style="margin-top:26px">
-        <div class="scale-lbl">Rating Scale</div>
+        <div class="scale-lbl">${t.ratingScale}</div>
         <div class="scale-track">${scaleTrack}</div>
         <div class="scale-names">${scaleNames}</div>
       </div>
     </div>
     <div class="ts-right">
-      <div class="scale-lbl" style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--c-faint)">Key Metrics · ${X(data.metrics_label)}</div>
+      <div class="scale-lbl" style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--c-faint)">${t.keyMetrics} · ${X(data.metrics_label)}</div>
       <div class="statgrid">${metricsHTML}</div>
     </div>
   </section>
 
   <div class="layout">
     <nav class="toc" aria-label="Contents">
-      <h4>Contents</h4>
+      <h4>${t.contents}</h4>
       <ol>
-        <li><a href="#s1">Investment Thesis</a></li>
-        <li><a href="#s2">Competitive Position</a></li>
-        <li><a href="#s3">Financial Performance</a></li>
-        <li><a href="#s4">Valuation Analysis</a></li>
-        <li><a href="#s5">Conclusion</a></li>
+        ${t.toc.map((label, i) => `<li><a href="#s${i+1}">${label}</a></li>`).join('')}
       </ol>
     </nav>
     <main class="flow">
 
       <section class="section" id="s1">
-        <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">Investment Thesis</h2></div>
+        <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">${t.sec1}</h2></div>
         <div class="sec-rule"></div>
         <p class="lead">${MB(data.thesis_lead)}</p>
         <div class="keypoints" style="margin-top:22px">${keyPointsHTML}</div>
         <div class="fig-grid" style="margin-top:calc(28px * var(--space))">
           <figure class="figure" style="margin:0">
             <figcaption class="fig-cap">
-              <span class="ttl">Revenue by Segment</span>
+              <span class="ttl">${t.segmentTitle}</span>
               <span class="ex">${X(data.metrics_label)} · ${X(ch.segments.unit_label)}</span>
             </figcaption>
             <div class="fig-body"><div data-chart="segments"></div></div>
-            <div class="fig-note"><b>Source:</b> ${X(c.name)} filings, Helvetia Research estimates.</div>
+            <div class="fig-note">${t.segSource(c.name)}</div>
           </figure>
           <figure class="figure" style="margin:0">
             <figcaption class="fig-cap">
-              <span class="ttl">${X(ch.peer_comparison.metric_name)} vs. Peers</span>
-              <span class="ex">Approximate estimates</span>
+              <span class="ttl">${X(ch.peer_comparison.metric_name)} ${t.vsPeers}</span>
+              <span class="ex">${t.approxEst}</span>
             </figcaption>
             <div class="fig-body"><div data-chart="peer_comparison"></div></div>
-            <div class="fig-note"><b>Note:</b> ${X(c.ticker)} highlighted; peer figures are estimates.</div>
+            <div class="fig-note">${t.peerNote(c.ticker)}</div>
           </figure>
         </div>
       </section>
 
       <section class="section" id="s2">
-        <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Business Model &amp; Competitive Position</h2></div>
+        <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">${t.sec2}</h2></div>
         <div class="sec-rule"></div>
         <div class="subhead">${X(data.section2.subhead1)}</div>
         <p class="prose">${MB(data.section2.prose1)}</p>
@@ -690,15 +793,15 @@ function buildReportContent(data) {
         <div class="fig-grid">
           <figure class="figure" style="margin:0">
             <figcaption class="fig-cap">
-              <span class="ttl">Revenue History &amp; Forecast</span>
+              <span class="ttl">${t.revHistory}</span>
               <span class="ex">${X(revFirst)}–${X(revLast)}</span>
             </figcaption>
             <div class="fig-body"><div data-chart="revenue_trend"></div></div>
           </figure>
           <figure class="figure" style="margin:0">
             <figcaption class="fig-cap">
-              <span class="ttl">Revenue Growth Rate</span>
-              <span class="ex">% YoY</span>
+              <span class="ttl">${t.revGrowth}</span>
+              <span class="ex">${t.pctYoY}</span>
             </figcaption>
             <div class="fig-body"><div data-chart="revenue_growth"></div></div>
           </figure>
@@ -706,7 +809,7 @@ function buildReportContent(data) {
       </section>
 
       <section class="section" id="s3">
-        <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">Financial Performance &amp; Outlook</h2></div>
+        <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">${t.sec3}</h2></div>
         <div class="sec-rule"></div>
         <div class="subhead">${X(data.section3.subhead1)}</div>
         <p class="prose">${MB(data.section3.prose1)}</p>
@@ -715,25 +818,25 @@ function buildReportContent(data) {
         <div class="fig-grid">
           <figure class="figure" style="margin:0">
             <figcaption class="fig-cap">
-              <span class="ttl">${X(ch.margin_trend.metric_name)} Trend</span>
+              <span class="ttl">${t.marginTrend(ch.margin_trend.metric_name)}</span>
               <span class="ex">% · ${X(mrgFirst)}–${X(mrgLast)}</span>
             </figcaption>
             <div class="fig-body"><div data-chart="margin_trend"></div></div>
           </figure>
           <figure class="figure" style="margin:0">
             <figcaption class="fig-cap">
-              <span class="ttl">${X(ch.eps_trend.metric_name)} Outlook</span>
+              <span class="ttl">${t.epsOutlook(ch.eps_trend.metric_name)}</span>
               <span class="ex">${X(epsFirst)}–${X(epsLast)}</span>
             </figcaption>
             <div class="fig-body"><div data-chart="eps_trend"></div></div>
           </figure>
         </div>
         <table class="tbl">
-          <caption>Financial Projections — Base Case</caption>
+          <caption>${t.financialProj}</caption>
           <thead>
             <tr>
-              <th>Year</th><th>Revenue</th><th>Growth</th>
-              <th>Gross Margin</th><th>Op. Margin</th><th>EPS</th>
+              <th>${t.colYear}</th><th>${t.colRevenue}</th><th>${t.colGrowth}</th>
+              <th>${t.colGrossMargin}</th><th>${t.colOpMargin}</th><th>${t.colEps}</th>
             </tr>
           </thead>
           <tbody>${tableRowsHTML}</tbody>
@@ -741,59 +844,57 @@ function buildReportContent(data) {
       </section>
 
       <section class="section" id="s4">
-        <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">Valuation &amp; Investment Analysis</h2></div>
+        <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">${t.sec4}</h2></div>
         <div class="sec-rule"></div>
         <div class="scenarios">
           <div class="scn bull">
-            <div class="scn-k">Bull Case (${X(scn.bull.probability)})</div>
+            <div class="scn-k">${t.bullLabel(scn.bull.probability)}</div>
             <div class="scn-px">${cur}${Math.floor(scn.bull.price)}</div>
             <div class="scn-name">${X(scn.bull.name)}</div>
             <p>${X(scn.bull.text)}</p>
-            <div class="scn-up">12M Return&nbsp; <b class="num pos">${X(scn.bull.return_str)}</b></div>
+            <div class="scn-up">${t.return12m}&nbsp; <b class="num pos">${X(scn.bull.return_str)}</b></div>
           </div>
           <div class="scn base">
-            <div class="scn-k">Our Target${scn.base.probability ? ` (${X(scn.base.probability)})` : ''}</div>
+            <div class="scn-k">${t.baseLabel(scn.base.probability)}</div>
             <div class="scn-px">${cur}${Math.floor(scn.base.price)}</div>
             <div class="scn-name">${X(scn.base.name)}</div>
             <p>${X(scn.base.text)}</p>
-            <div class="scn-up">Target&nbsp; <b class="num">${cur}${Math.floor(scn.base.price)} (${X(scn.base.return_str)})</b></div>
+            <div class="scn-up">${t.target}&nbsp; <b class="num">${cur}${Math.floor(scn.base.price)} (${X(scn.base.return_str)})</b></div>
           </div>
           <div class="scn bear">
-            <div class="scn-k">Bear Case (${X(scn.bear.probability)})</div>
+            <div class="scn-k">${t.bearLabel(scn.bear.probability)}</div>
             <div class="scn-px">${cur}${Math.floor(scn.bear.price)}</div>
             <div class="scn-name">${X(scn.bear.name)}</div>
             <p>${X(scn.bear.text)}</p>
-            <div class="scn-up">Risk&nbsp; <b class="num neg">${X(scn.bear.return_str)}</b></div>
+            <div class="scn-up">${t.risk}&nbsp; <b class="num neg">${X(scn.bear.return_str)}</b></div>
           </div>
         </div>
 
         <figure class="figure ladder" style="margin-top:26px">
           <figcaption class="fig-cap">
-            <span class="ttl">Price Target and Valuation Range</span>
+            <span class="ttl">${t.priceTarget}</span>
             <span class="ex">${cur}</span>
           </figcaption>
           <div class="fig-body"><div data-chart="targetladder"></div></div>
           <div class="fig-note">
-            <b>How to read:</b> Our ${cur}${Math.floor(data.target_price)} ${X(data.rating)} target
-            (${X(data.upside_str)} vs. current ${cur}${Math.floor(data.current_price)}).
-            Bear: ${cur}${Math.floor(scn.bear.price)}; Bull: ${cur}${Math.floor(scn.bull.price)}.
+            ${t.howToRead(cur, data.target_price, data.rating, data.upside_str, data.current_price, scn.bear.price, scn.bull.price)}
           </div>
         </figure>
 
-        <div class="subhead">Valuation Methodology</div>
+        <div class="subhead">${t.valMethod}</div>
         <p class="prose">${MB(data.section4.prose)}</p>
 
         <figure class="figure" style="margin-top:calc(26px * var(--space))">
           <figcaption class="fig-cap">
-            <span class="ttl">Price Scenario Summary</span>
-            <span class="ex">${cur} · 12-month targets</span>
+            <span class="ttl">${t.scenarioSum}</span>
+            <span class="ex">${t.targets12m(cur)}</span>
           </figcaption>
           <div class="fig-body"><div data-chart="scenarios_chart"></div></div>
         </figure>
       </section>
 
       <section class="section" id="s5">
-        <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">Conclusion</h2></div>
+        <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">${t.sec5}</h2></div>
         <div class="sec-rule"></div>
         <p class="bigquote">${X(data.section5.bigquote)}</p>
         <p class="prose" style="margin-top:18px">${MB(data.section5.prose)}</p>
@@ -814,7 +915,7 @@ function buildReportContent(data) {
         </svg>
         <span class="wm" style="line-height:1.1">
           <b style="color:var(--c-ink);font-family:var(--font-display);font-weight:600;letter-spacing:.14em;font-size:15px">HELVETIA RESEARCH</b>
-          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:.28em;color:var(--c-accent-2);text-transform:uppercase;margin-top:3px">Equity Research · Geneva</span>
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:.28em;color:var(--c-accent-2);text-transform:uppercase;margin-top:3px">${t.researchSubline}</span>
         </span>
       </div>
       <div style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:.12em;color:var(--c-faint);text-transform:uppercase;text-align:right">
@@ -822,7 +923,7 @@ function buildReportContent(data) {
         ${X(data.report_date)} · ${X(data.rating)} · Target ${cur}${Math.floor(data.target_price)}
       </div>
     </div>
-    <p class="disclaimer"><b>Disclaimer.</b> This document is produced by Helvetia Research for informational purposes only and does not constitute an offer or solicitation to buy or sell any financial instrument. Opinions and estimates reflect our judgment as of the publication date and are subject to change without notice. Past performance is not indicative of future results. Charts and figures are based on publicly available information and Helvetia Research internal estimates; they may contain inaccuracies. This demonstration note does not constitute investment advice. Investors should conduct their own analysis and, where appropriate, consult a licensed advisor. © 2026 Helvetia Research. All rights reserved.</p>
+    <p class="disclaimer">${t.disclaimer}</p>
   </footer>
   `;
 }
@@ -901,7 +1002,7 @@ async function generate() {
       body: JSON.stringify({
         model: 'claude-opus-4-8',
         max_tokens: 8000,
-        system: `You are a senior equity research analyst at Helvetia Research, Geneva. Produce institutional-grade equity initiation notes. Use your best knowledge of the company for realistic financials, valuation, and investment analysis. Be specific: name competitors, cite margins, reference growth rates. All numbers in English format (periods as decimals, B=billions, M=millions). Today's date: ${today}.`,
+        system: `You are a senior equity research analyst at Helvetia Research, Geneva. Produce institutional-grade equity initiation notes. Use your best knowledge of the company for realistic financials, valuation, and investment analysis. Be specific: name competitors, cite margins, reference growth rates. All numbers in English format (periods as decimals, B=billions, M=millions). Today's date: ${today}.${currentLang === 'fr' ? ' IMPORTANT: Write the entire report in French (langue française). All prose, section headings, key points, chart labels, segment names, and scenario descriptions must be in French using standard French financial terminology. The "rating" field must still use one of the English enum values (Sell/Reduce/Hold/Overweight/Buy).' : ''}`,
         tools: [EQUITY_TOOL],
         tool_choice: {type: 'tool', name: 'equity_report'},
         messages: [{role: 'user', content: `Generate a comprehensive equity research initiation note for: ${query}`}]
@@ -925,7 +1026,7 @@ async function generate() {
     const upsidePct = (data.target_price - data.current_price) / data.current_price * 100;
     data.upside_pct   = upsidePct;
     data.upside_str   = (upsidePct >= 0 ? '+' : '') + upsidePct.toFixed(1) + '%';
-    data.upside_label = upsidePct >= 0 ? 'Upside' : 'Downside';
+    data.upside_label = I18N[currentLang].upsideLabel(upsidePct);
     data.upside_class = upsidePct >= 0 ? 'up' : 'dn';
     data.rating_index = RATING_INDEX[data.rating] ?? 2;
     data.report_date  = today;
@@ -934,7 +1035,7 @@ async function generate() {
 
     const chartsConfig = buildChartsConfig(data);
 
-    document.getElementById('report-sheet').innerHTML = buildReportContent(data);
+    document.getElementById('report-sheet').innerHTML = buildReportContent(data, currentLang);
     document.title = `${data.company.name} — Equity Research · Helvetia Research`;
 
     document.body.classList.remove('form-mode');
