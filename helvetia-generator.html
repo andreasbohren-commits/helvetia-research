@@ -84,6 +84,8 @@ body.report-mode #form-wrap{display:none}
 .gen-btn.loading .spinner{display:block}
 .gen-btn.loading .btn-text{display:none}
 @keyframes spin{to{transform:rotate(360deg)}}
+.gen-status{display:none;margin-top:12px;text-align:center;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#5d6b7a}
+.gen-status.visible{display:block}
 .hint-line{margin-top:16px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:#8a96a3;letter-spacing:.04em;text-align:center}
 .hint-line span{color:#b8901f}
 .err-box{margin-top:20px;border-left:3px solid #9a2b22;background:#f4e6e2;padding:14px 18px;display:none}
@@ -295,6 +297,7 @@ body.report-mode #report-wrap{display:block}
         <div class="spinner"></div>
         <span class="btn-text">Generate Report</span>
       </button>
+      <div class="gen-status" id="gen-status"></div>
 
       <div class="examples">
         <span class="ex-lbl">Try these</span>
@@ -928,6 +931,72 @@ function buildReportContent(data, lang) {
   `;
 }
 
+// ── Live price lookup (web search) ─────────────────────────────────────────────
+const WEB_SEARCH_TOOL = { type: 'web_search_20250305', name: 'web_search', max_uses: 5 };
+
+const PRICE_TOOL = {
+  name: 'price_quote',
+  description: 'Report the most recent share price found for the company.',
+  input_schema: {
+    type: 'object',
+    required: ['current_price', 'currency_symbol'],
+    properties: {
+      current_price: {type:'number', description:'Latest share price as a plain number (no currency symbol)'},
+      currency_symbol: {type:'string', description:"Currency the price is quoted in, e.g. '$', 'CHF', '€', '£'"},
+      ticker: {type:'string'},
+      exchange: {type:'string'},
+      as_of: {type:'string', description:'When the price is as of, e.g. "2026-06-30 close"'}
+    }
+  }
+};
+
+// Returns {current_price, currency_symbol, ticker, exchange, as_of} or null on failure.
+async function fetchLivePrice(apiKey, query) {
+  const messages = [{ role: 'user', content:
+    `Find the latest share price for the company: ${query}. Search the web for the most recent trading price (use the last close if markets are closed). Once found, call the price_quote tool with the number, its currency, the ticker and the exchange.` }];
+
+  for (let i = 0; i < 4; i++) {
+    let json;
+    try {
+      const resp = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true',
+        },
+        body: JSON.stringify({
+          model: 'claude-opus-4-8',
+          max_tokens: 1500,
+          system: 'You are a financial market-data assistant. Use web search to find the most recent share price, then report it via the price_quote tool. Prefer primary sources such as the listing exchange, Google Finance, Yahoo Finance or Bloomberg.',
+          tools: [WEB_SEARCH_TOOL, PRICE_TOOL],
+          messages
+        })
+      });
+      if (!resp.ok) return null;
+      json = await resp.json();
+    } catch { return null; }
+
+    const block = json.content?.find(b => b.type === 'tool_use' && b.name === 'price_quote');
+    if (block && typeof block.input?.current_price === 'number') return block.input;
+
+    // Web search may pause for a long-running turn — feed the partial turn back and continue.
+    if (json.stop_reason === 'pause_turn' && json.content?.length) {
+      messages.push({ role: 'assistant', content: json.content });
+      continue;
+    }
+    // Model answered in prose without calling the tool — nudge it once.
+    if (json.content?.length) {
+      messages.push({ role: 'assistant', content: json.content });
+      messages.push({ role: 'user', content: 'Now call the price_quote tool with the price you found.' });
+      continue;
+    }
+    return null;
+  }
+  return null;
+}
+
 // ── Equity tool schema ─────────────────────────────────────────────────────────
 const EQUITY_TOOL = {
   name: 'equity_report',
@@ -991,6 +1060,15 @@ async function generate() {
     const d = new Date();
     const today = `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
 
+    // Step 1 — look up the live share price via web search.
+    setStatus('Fetching live market price…');
+    const live = await fetchLivePrice(apiKey, query);
+    const priceNote = (live && typeof live.current_price === 'number')
+      ? ` The verified current share price is ${live.currency_symbol || ''}${live.current_price}${live.as_of ? ' (as of ' + live.as_of + ')' : ''}. You MUST use exactly this value for current_price and use "${live.currency_symbol || ''}" as currency_symbol. Anchor the target price and all scenario prices to this current price. Do not substitute your own price estimate.`
+      : '';
+
+    // Step 2 — generate the full report, anchored to that price.
+    setStatus('Generating report…');
     const resp = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -1002,7 +1080,7 @@ async function generate() {
       body: JSON.stringify({
         model: 'claude-opus-4-8',
         max_tokens: 8000,
-        system: `You are a senior equity research analyst at Helvetia Research, Geneva. Produce institutional-grade equity initiation notes. Use your best knowledge of the company for realistic financials, valuation, and investment analysis. Be specific: name competitors, cite margins, reference growth rates. All numbers in English format (periods as decimals, B=billions, M=millions). Today's date: ${today}.${currentLang === 'fr' ? ' IMPORTANT: Write the entire report in French (langue française). All prose, section headings, key points, chart labels, segment names, and scenario descriptions must be in French using standard French financial terminology. The "rating" field must still use one of the English enum values (Sell/Reduce/Hold/Overweight/Buy).' : ''}`,
+        system: `You are a senior equity research analyst at Helvetia Research, Geneva. Produce institutional-grade equity initiation notes. Use your best knowledge of the company for realistic financials, valuation, and investment analysis. Be specific: name competitors, cite margins, reference growth rates. All numbers in English format (periods as decimals, B=billions, M=millions). Today's date: ${today}.${priceNote}${currentLang === 'fr' ? ' IMPORTANT: Write the entire report in French (langue française). All prose, section headings, key points, chart labels, segment names, and scenario descriptions must be in French using standard French financial terminology. The "rating" field must still use one of the English enum values (Sell/Reduce/Hold/Overweight/Buy).' : ''}`,
         tools: [EQUITY_TOOL],
         tool_choice: {type: 'tool', name: 'equity_report'},
         messages: [{role: 'user', content: `Generate a comprehensive equity research initiation note for: ${query}`}]
@@ -1021,6 +1099,12 @@ async function generate() {
     if (!toolBlock) throw new Error('Claude did not return structured report data. Please try again.');
 
     const data = toolBlock.input;
+
+    // Anchor displayed price to the verified live value, regardless of what the model echoed.
+    if (live && typeof live.current_price === 'number') {
+      data.current_price = live.current_price;
+      if (live.currency_symbol) data.currency_symbol = live.currency_symbol;
+    }
 
     // Compute derived fields
     const upsidePct = (data.target_price - data.current_price) / data.current_price * 100;
@@ -1050,7 +1134,14 @@ async function generate() {
   } finally {
     btn.disabled = false;
     btn.classList.remove('loading');
+    setStatus('');
   }
+}
+
+function setStatus(msg) {
+  const el = document.getElementById('gen-status');
+  el.textContent = msg;
+  el.classList.toggle('visible', !!msg);
 }
 
 function showError(msg) {
