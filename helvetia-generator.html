@@ -953,7 +953,7 @@ const PRICE_TOOL = {
 // Returns { price: {current_price, currency_symbol, ...} | null, error: string | null }.
 async function fetchLivePrice(apiKey, query) {
   const messages = [{ role: 'user', content:
-    `Find the latest share price for the company: ${query}. Search the web for the most recent trading price (use yesterday's / the last close if markets are closed). Once found, call the price_quote tool with the number, its currency, the ticker and the exchange.` }];
+    `Find the latest share price for the company: ${query}. Search the web for the most recent trading price (use yesterday's / the last close if markets are closed). As soon as you have the number, call the price_quote tool — keep any text to one short line.` }];
   let lastError = 'Price lookup did not return a value';
 
   for (let i = 0; i < 4; i++) {
@@ -969,8 +969,8 @@ async function fetchLivePrice(apiKey, query) {
         },
         body: JSON.stringify({
           model: 'claude-opus-4-8',
-          max_tokens: 1500,
-          system: 'You are a financial market-data assistant. Use web search to find the most recent share price, then report it via the price_quote tool. Prefer primary sources such as the listing exchange, Google Finance, Yahoo Finance or Bloomberg.',
+          max_tokens: 2048,
+          system: 'You are a financial market-data assistant. Use web search to find the most recent share price, then immediately report it via the price_quote tool. Prefer primary sources such as the listing exchange, Google Finance, Yahoo Finance or Bloomberg. Do not write long summaries — find the price and call the tool.',
           tools: [WEB_SEARCH_TOOL, PRICE_TOOL],
           messages
         })
