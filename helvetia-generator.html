@@ -950,10 +950,11 @@ const PRICE_TOOL = {
   }
 };
 
-// Returns {current_price, currency_symbol, ticker, exchange, as_of} or null on failure.
+// Returns { price: {current_price, currency_symbol, ...} | null, error: string | null }.
 async function fetchLivePrice(apiKey, query) {
   const messages = [{ role: 'user', content:
-    `Find the latest share price for the company: ${query}. Search the web for the most recent trading price (use the last close if markets are closed). Once found, call the price_quote tool with the number, its currency, the ticker and the exchange.` }];
+    `Find the latest share price for the company: ${query}. Search the web for the most recent trading price (use yesterday's / the last close if markets are closed). Once found, call the price_quote tool with the number, its currency, the ticker and the exchange.` }];
+  let lastError = 'Price lookup did not return a value';
 
   for (let i = 0; i < 4; i++) {
     let json;
@@ -974,12 +975,16 @@ async function fetchLivePrice(apiKey, query) {
           messages
         })
       });
-      if (!resp.ok) return null;
+      if (!resp.ok) {
+        try { const e = await resp.json(); lastError = e.error?.message || `HTTP ${resp.status}`; }
+        catch { lastError = `HTTP ${resp.status}`; }
+        return { price: null, error: lastError };
+      }
       json = await resp.json();
-    } catch { return null; }
+    } catch (e) { return { price: null, error: e.message || 'Network error' }; }
 
     const block = json.content?.find(b => b.type === 'tool_use' && b.name === 'price_quote');
-    if (block && typeof block.input?.current_price === 'number') return block.input;
+    if (block && typeof block.input?.current_price === 'number') return { price: block.input, error: null };
 
     // Web search may pause for a long-running turn — feed the partial turn back and continue.
     if (json.stop_reason === 'pause_turn' && json.content?.length) {
@@ -992,9 +997,9 @@ async function fetchLivePrice(apiKey, query) {
       messages.push({ role: 'user', content: 'Now call the price_quote tool with the price you found.' });
       continue;
     }
-    return null;
+    return { price: null, error: lastError };
   }
-  return null;
+  return { price: null, error: lastError };
 }
 
 // ── Equity tool schema ─────────────────────────────────────────────────────────
@@ -1062,13 +1067,15 @@ async function generate() {
 
     // Step 1 — look up the live share price via web search.
     setStatus('Fetching live market price…');
-    const live = await fetchLivePrice(apiKey, query);
+    const lookup = await fetchLivePrice(apiKey, query);
+    const live = lookup.price;
+    if (live) setStatus(`Live price ${live.currency_symbol || ''}${live.current_price}${live.as_of ? ' · ' + live.as_of : ''} — generating report…`);
     const priceNote = (live && typeof live.current_price === 'number')
       ? ` The verified current share price is ${live.currency_symbol || ''}${live.current_price}${live.as_of ? ' (as of ' + live.as_of + ')' : ''}. You MUST use exactly this value for current_price and use "${live.currency_symbol || ''}" as currency_symbol. Anchor the target price and all scenario prices to this current price. Do not substitute your own price estimate.`
       : '';
 
     // Step 2 — generate the full report, anchored to that price.
-    setStatus('Generating report…');
+    if (!live) setStatus('Generating report…');
     const resp = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -1120,6 +1127,11 @@ async function generate() {
     const chartsConfig = buildChartsConfig(data);
 
     document.getElementById('report-sheet').innerHTML = buildReportContent(data, currentLang);
+    if (!live) {
+      const reason = X(lookup.error || 'unknown');
+      document.getElementById('report-sheet').insertAdjacentHTML('afterbegin',
+        `<div style="background:#fbeaea;border:1px solid #d99;color:#8a2a2a;padding:10px 16px;font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.5;margin-bottom:18px">⚠ Live price could not be verified (${reason}). The price shown is the model's estimate and may be out of date — verify before use.</div>`);
+    }
     document.title = `${data.company.name} — Equity Research · Helvetia Research`;
 
     document.body.classList.remove('form-mode');
