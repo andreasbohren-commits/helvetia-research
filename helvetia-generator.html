@@ -951,9 +951,9 @@ const PRICE_TOOL = {
 };
 
 // Returns { price: {current_price, currency_symbol, ...} | null, error: string | null }.
-async function fetchLivePrice(apiKey, query) {
+async function fetchLivePrice(apiKey, query, today) {
   const messages = [{ role: 'user', content:
-    `Find the latest share price for the company: ${query}. Search the web for the most recent trading price (use yesterday's / the last close if markets are closed). As soon as you have the number, call the price_quote tool — keep any text to one short line.` }];
+    `Find the latest share price for the company: ${query}. It must be dated within the last few days of ${today} (use the last close if markets are currently closed). As soon as you have a current price, call the price_quote tool — keep any text to one short line.` }];
   let lastError = 'Price lookup did not return a value';
 
   for (let i = 0; i < 4; i++) {
@@ -969,8 +969,8 @@ async function fetchLivePrice(apiKey, query) {
         },
         body: JSON.stringify({
           model: 'claude-opus-4-8',
-          max_tokens: 2048,
-          system: 'You are a financial market-data assistant. Use web search to find the most recent share price, then immediately report it via the price_quote tool. Prefer primary sources such as the listing exchange, Google Finance, Yahoo Finance or Bloomberg. Do not write long summaries — find the price and call the tool.',
+          max_tokens: 2560,
+          system: `You are a financial market-data assistant. Today is ${today}. Use web search to find the MOST RECENT share price. The price you report must be dated within the last 4 days of today. If the first results show an older date, search again with a fresher query (include the current month and year, or query a real-time quote source) until you find a current price. Prefer primary sources such as the listing exchange, Google Finance, Yahoo Finance, Morningstar or Bloomberg. Then immediately call the price_quote tool — do not write long summaries.`,
           tools: [WEB_SEARCH_TOOL, PRICE_TOOL],
           messages
         })
@@ -1067,7 +1067,7 @@ async function generate() {
 
     // Step 1 — look up the live share price via web search.
     setStatus('Fetching live market price…');
-    const lookup = await fetchLivePrice(apiKey, query);
+    const lookup = await fetchLivePrice(apiKey, query, today);
     const live = lookup.price;
     if (live) setStatus(`Live price ${live.currency_symbol || ''}${live.current_price}${live.as_of ? ' · ' + live.as_of : ''} — generating report…`);
     const priceNote = (live && typeof live.current_price === 'number')
