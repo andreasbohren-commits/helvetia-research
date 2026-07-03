@@ -313,7 +313,7 @@ body.report-mode #report-wrap{display:block}
         <p id="err-text"></p>
       </div>
 
-      <p class="hint-line">Generation takes ~30 seconds &nbsp;·&nbsp; <span>Powered by Claude Opus</span></p>
+      <p class="hint-line">Generation takes ~30 seconds &nbsp;·&nbsp; <span>Powered by Claude Opus</span> &nbsp;·&nbsp; <span id="build-tag">build 2026-07-03e</span></p>
     </div>
   </main>
 
@@ -955,8 +955,9 @@ async function fetchLivePrice(apiKey, query, today) {
   const messages = [{ role: 'user', content:
     `Find the latest share price for the company: ${query}. Use its primary home-country listing and native currency. It must be dated within the last few days of ${today} (use the last close if markets are currently closed). As soon as you have a current price, call the price_quote tool — keep any text to one short line.` }];
   let lastError = 'Price lookup did not return a value';
+  let adrRetried = false;
 
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 5; i++) {
     let json;
     try {
       const resp = await fetch('https://api.anthropic.com/v1/messages', {
@@ -984,7 +985,21 @@ async function fetchLivePrice(apiKey, query, today) {
     } catch (e) { return { price: null, error: e.message || 'Network error' }; }
 
     const block = json.content?.find(b => b.type === 'tool_use' && b.name === 'price_quote');
-    if (block && typeof block.input?.current_price === 'number') return { price: block.input, error: null };
+    if (block && typeof block.input?.current_price === 'number') {
+      // Reject a US ADR / OTC secondary listing once and ask for the primary home-country line.
+      const ex = (block.input.exchange || '').toLowerCase();
+      const looksADR = /otc|adr|pink|otcmkts|grey market/.test(ex);
+      if (looksADR && !adrRetried) {
+        adrRetried = true;
+        messages.push({ role: 'assistant', content: json.content });
+        messages.push({ role: 'user', content: [
+          { type: 'tool_result', tool_use_id: block.id, content: 'That is a US ADR / OTC secondary listing, not the primary market.' },
+          { type: 'text', text: 'Search again for the company\'s PRIMARY home-country exchange listing and report that price in its native currency (e.g. SIX Swiss Exchange in CHF, Euronext in EUR, LSE in GBP). Then call price_quote.' }
+        ]});
+        continue;
+      }
+      return { price: block.input, error: null };
+    }
 
     // Web search may pause for a long-running turn — feed the partial turn back and continue.
     if (json.stop_reason === 'pause_turn' && json.content?.length) {
